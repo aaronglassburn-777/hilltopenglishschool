@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hilltop English School — โรงเรียนสอนภาษาอังกฤษ เชียงราย</title>
+<meta name="description" content="โรงเรียนสอนภาษาอังกฤษฮิลล์ท็อป เชียงราย — เด็ก ๆ เรียนรู้การพูด อ่าน เขียนภาษาอังกฤษผ่านเกม นิทาน และเพลง กับครูมืออาชีพที่ใส่ใจ">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=Prompt:wght@400;500;600;700&family=Sarabun:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --forest:#1e4d3b;
+  --forest-deep:#143528;
+  --leaf:#3f7d5c;
+  --sun:#f4a83d;
+  --sun-soft:#fbd992;
+  --clay:#e2724a;
+  --cream:#faf6ef;
+  --paper:#ffffff;
+  --ink:#1f2a25;
+  --ink-soft:#5a6b62;
+  --radius:20px;
+  --shadow:0 12px 40px rgba(20,53,40,.10);
+  --f-head:'Prompt','Fraunces',Georgia,serif;
+  --f-body:'Sarabun','Inter',system-ui,sans-serif;
+  font-size:16px;
+}
+html[lang="en"]{--f-head:'Fraunces',Georgia,serif;--f-body:'Inter',system-ui,sans-serif}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--f-body);color:var(--ink);background:var(--cream);line-height:1.7}
+h1,h2,h3{font-family:var(--f-head)}
+img{max-width:100%;display:block}
+a{color:inherit}
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px}
+.eyebrow{display:inline-block;font-size:.8rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--clay);margin-bottom:14px}
+section{padding:96px 0}
+.btn{display:inline-block;padding:15px 32px;border-radius:999px;font-weight:600;font-size:.98rem;text-decoration:none;transition:.25s;border:2px solid transparent;font-family:var(--f-head)}
+.btn-primary{background:var(--sun);color:var(--forest-deep);box-shadow:0 8px 24px rgba(244,168,61,.4)}
+.btn-primary:hover{background:#fff;transform:translateY(-3px) scale(1.02)}
+.btn-ghost{border-color:rgba(255,255,255,.55);color:#fff;backdrop-filter:blur(6px)}
+.btn-ghost:hover{background:#fff;color:var(--forest-deep)}
+.btn-outline{border-color:var(--forest);color:var(--forest)}
+.btn-outline:hover{background:var(--forest);color:#fff}
+
+/* reveal on scroll */
+.rv{opacity:0;transform:translateY(34px);transition:opacity .8s cubic-bezier(.2,.7,.3,1),transform .8s cubic-bezier(.2,.7,.3,1)}
+.rv.in{opacity:1;transform:none}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:50;transition:.35s}
+nav.scrolled{background:rgba(250,246,239,.94);backdrop-filter:blur(14px);box-shadow:0 4px 24px rgba(20,53,40,.08)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;padding:14px 24px;max-width:1280px;margin:0 auto}
+.logo{display:flex;align-items:center;gap:12px;text-decoration:none}
+.logo-mark{width:46px;height:46px;border-radius:14px;background:linear-gradient(145deg,var(--sun),var(--clay));display:grid;place-items:center;color:#fff;font-family:'Fraunces',serif;font-weight:700;font-size:1.3rem;box-shadow:0 4px 14px rgba(0,0,0,.2)}
+.logo-text{line-height:1.15}
+.logo-text b{display:block;font-family:var(--f-head);font-size:1.02rem;color:#fff;transition:.3s}
+.logo-text span{font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.7);transition:.3s}
+nav.scrolled .logo-text b{color:var(--forest-deep)}
+nav.scrolled .logo-text span{color:var(--ink-soft)}
+.nav-links{display:flex;gap:26px;list-style:none;align-items:center}
+.nav-links a{text-decoration:none;font-size:.93rem;font-weight:500;color:rgba(255,255,255,.92);transition:.2s}
+nav.scrolled .nav-links a{color:var(--ink)}
+.nav-links a:hover{color:var(--sun)!important}
+.nav-cta{background:var(--sun);color:var(--forest-deep)!important;padding:11px 22px;border-radius:999px;font-weight:700}
+.nav-cta:hover{background:var(--clay);color:#fff!important}
+/* language toggle */
+.lang-toggle{display:flex;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:3px;cursor:pointer;user-select:none;transition:.3s}
+nav.scrolled .lang-toggle{background:rgba(30,77,59,.08);border-color:rgba(30,77,59,.2)}
+.lang-toggle span{padding:5px 13px;border-radius:999px;font-size:.8rem;font-weight:700;color:rgba(255,255,255,.8);transition:.25s}
+nav.scrolled .lang-toggle span{color:var(--ink-soft)}
+.lang-toggle span.on{background:var(--sun);color:var(--forest-deep)!important}
+@media(max-width:900px){.nav-links li.pg{display:none}}
+
+/* HERO */
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;color:#fff;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:url('assets/img/hero.jpg') center 30%/cover no-repeat;animation:kenburns 22s ease-in-out infinite alternate}
+@keyframes kenburns{from{transform:scale(1)}to{transform:scale(1.12)}}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(100deg,rgba(20,53,40,.92) 0%,rgba(20,53,40,.72) 42%,rgba(20,53,40,.18) 100%)}
+.hero-content{position:relative;z-index:2;padding:150px 0 120px;max-width:640px}
+.hero .eyebrow{color:var(--sun-soft)}
+.hero h1{font-size:clamp(2.4rem,5vw,3.9rem);line-height:1.15;font-weight:600;margin:14px 0 22px}
+.hero h1 em{font-style:normal;color:var(--sun);white-space:nowrap}
+.hero p.lede{font-size:1.15rem;color:rgba(255,255,255,.88);margin-bottom:36px;max-width:33rem}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap}
+.hero-note{margin-top:28px;font-size:.88rem;color:rgba(255,255,255,.6)}
+.hero-scroll{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);z-index:2;color:rgba(255,255,255,.7);font-size:1.4rem;animation:bob 2s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,10px)}}
+
+/* STATS BAND */
+.stats{background:var(--paper);padding:0}
+.stats-band{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(30,77,59,.08);border-radius:var(--radius);overflow:hidden;transform:translateY(-56px);box-shadow:var(--shadow);position:relative;z-index:3}
+.stat{background:var(--paper);padding:32px 24px;text-align:center}
+.stat .num{font-family:var(--f-head);font-size:2.2rem;font-weight:700;color:var(--forest)}
+.stat p{font-size:.88rem;color:var(--ink-soft);margin-top:4px}
+@media(max-width:760px){.stats-band{grid-template-columns:repeat(2,1fr)}}
+
+/* STORY + PLAYBOARD */
+.story{background:var(--paper);padding-top:40px}
+.story .wrap{display:grid;grid-template-columns:.92fr 1.08fr;gap:56px;align-items:center}
+.story h2{font-size:clamp(1.9rem,3.2vw,2.5rem);color:var(--forest-deep);margin-bottom:20px;line-height:1.25}
+.story p{color:var(--ink-soft);margin-bottom:18px;font-size:1.03rem}
+.story blockquote{border-left:4px solid var(--sun);padding:6px 0 6px 22px;font-family:var(--f-head);font-size:1.18rem;color:var(--forest);margin:26px 0}
+.play-hint{font-size:.85rem;color:var(--clay);font-weight:600;text-align:center;margin-top:6px}
+/* diamond board */
+.board{display:grid;grid-template-columns:repeat(4,1fr);gap:8%;padding:6% 4%;perspective:1200px}
+.dia{aspect-ratio:1/1;position:relative;transform:rotate(45deg);cursor:pointer;animation:float 5s ease-in-out infinite}
+.dia:nth-child(odd){animation-delay:-2.5s}
+.dia:nth-child(3n){animation-duration:6.5s}
+.dia:nth-child(even){margin-top:46%}
+@keyframes float{0%,100%{transform:rotate(45deg) translateY(0)}50%{transform:rotate(45deg) translateY(-9px)}}
+.dia-inner{position:absolute;inset:0;transition:transform .7s cubic-bezier(.3,1.4,.4,1);transform-style:preserve-3d}
+.dia.flip .dia-inner{transform:rotateY(180deg)}
+.dia-face{position:absolute;inset:0;border-radius:22%;overflow:hidden;backface-visibility:hidden;box-shadow:0 14px 34px rgba(20,53,40,.22)}
+.dia-front img{width:145%;height:145%;object-fit:cover;transform:rotate(-45deg);position:absolute;top:50%;left:50%;translate:-50% -50%;transition:.5s}
+.dia:hover{z-index:5}
+.dia:hover .dia-front img{scale:1.1}
+.dia-front::after{content:"";position:absolute;inset:0;background:linear-gradient(160deg,transparent 55%,rgba(20,53,40,.55));opacity:.9}
+.dia-label{position:absolute;inset:0;display:grid;place-items:end center;padding-bottom:14%;transform:rotate(-45deg) scale(1.2);color:#fff;font-family:var(--f-head);font-weight:600;font-size:clamp(.7rem,1.4vw,.95rem);text-shadow:0 2px 8px rgba(0,0,0,.6);z-index:2}
+.dia-back{transform:rotateY(180deg);display:grid;place-items:center;text-align:center;padding:12%}
+.dia-back .in{transform:rotate(-45deg);color:#fff}
+.dia-back .in b{display:block;font-family:var(--f-head);font-size:clamp(.75rem,1.5vw,1rem);margin-bottom:4px}
+.dia-back .in span{font-size:clamp(.6rem,1.1vw,.78rem);opacity:.9;line-height:1.4;display:block}
+.bg-1{background:linear-gradient(145deg,var(--clay),#f0956b)}
+.bg-2{background:linear-gradient(145deg,var(--forest),var(--leaf))}
+.bg-3{background:linear-gradient(145deg,var(--sun),#f6c268)}
+.bg-4{background:linear-gradient(145deg,#4a7fa5,#6ba3c9)}
+@media(max-width:900px){.story .wrap{grid-template-columns:1fr}.board{margin-top:30px}}
+
+/* PROGRAMS */
+.programs{background:var(--cream)}
+.sec-head{text-align:center;max-width:46rem;margin:0 auto 60px}
+.sec-head h2{font-size:clamp(1.9rem,3.2vw,2.5rem);color:var(--forest-deep);margin-bottom:16px;line-height:1.25}
+.sec-head p{color:var(--ink-soft);font-size:1.05rem}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.card{background:var(--paper);border-radius:var(--radius);padding:34px 28px;transition:.35s;border:1px solid rgba(30,77,59,.06)}
+.card:hover{transform:translateY(-8px) rotate(-1deg);box-shadow:var(--shadow)}
+.card .icon{width:56px;height:56px;border-radius:16px;display:grid;place-items:center;font-size:1.6rem;margin-bottom:20px}
+.i-1{background:#fdeeda}.i-2{background:#fbe3d8}.i-3{background:#e2efe7}.i-4{background:#f3ecdd}
+.card h3{font-size:1.2rem;color:var(--forest-deep);margin-bottom:10px}
+.card p{font-size:.93rem;color:var(--ink-soft)}
+@media(max-width:960px){.cards{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.cards{grid-template-columns:1fr}}
+
+/* TEACHER */
+.teacher{background:linear-gradient(160deg,var(--forest-deep),var(--forest));color:#fff;position:relative;overflow:hidden}
+.teacher::before{content:"";position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(244,168,61,.18),transparent 70%);bottom:-200px;right:-140px}
+.teacher .wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:64px;align-items:center;position:relative;z-index:1}
+.teacher-photos{position:relative}
+.teacher-photos .main{border-radius:var(--radius);overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.35);aspect-ratio:4/4.4}
+.teacher-photos .main img{width:100%;height:100%;object-fit:cover}
+.teacher-photos .small{position:absolute;width:44%;border-radius:16px;overflow:hidden;box-shadow:0 16px 40px rgba(0,0,0,.4);border:4px solid rgba(255,255,255,.9);bottom:-30px;right:-20px;aspect-ratio:1/1.2}
+.teacher-photos .small img{width:100%;height:100%;object-fit:cover}
+.teacher h2{font-size:clamp(1.9rem,3.2vw,2.4rem);margin-bottom:20px;line-height:1.25}
+.teacher p{color:rgba(255,255,255,.85);margin-bottom:18px}
+.teacher .eyebrow{color:var(--sun-soft)}
+.cred{display:flex;gap:14px;align-items:flex-start;margin-top:20px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:18px 22px}
+.cred .badge{font-size:1.5rem}
+.cred b{display:block;font-size:.96rem}
+.cred span{font-size:.86rem;color:rgba(255,255,255,.65)}
+@media(max-width:900px){.teacher .wrap{grid-template-columns:1fr}.teacher-photos .small{right:6px}}
+
+/* TESTIMONIALS */
+.quotes{background:var(--paper)}
+.quotes .cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.quote{background:var(--cream);border-radius:var(--radius);padding:34px 30px;display:flex;flex-direction:column;transition:.3s}
+.quote:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
+.quote .stars{color:var(--sun);letter-spacing:3px;margin-bottom:16px}
+.quote p{font-size:.97rem;flex:1;font-style:italic}
+.quote .who{margin-top:22px;display:flex;align-items:center;gap:12px}
+.quote .avatar{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-weight:700;color:#fff;font-size:.95rem}
+.a1{background:var(--clay)}.a2{background:var(--forest)}.a3{background:var(--sun);color:var(--forest-deep)}
+.quote .who b{font-size:.9rem;display:block}
+.quote .who span{font-size:.8rem;color:var(--ink-soft)}
+@media(max-width:900px){.quotes .cards3{grid-template-columns:1fr}}
+
+/* VISIT */
+.visit{background:var(--cream)}
+.visit .wrap{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.visit h2{font-size:clamp(1.9rem,3.2vw,2.5rem);color:var(--forest-deep);margin-bottom:18px;line-height:1.25}
+.visit p{color:var(--ink-soft);margin-bottom:26px}
+.info-list{list-style:none;display:grid;gap:16px;margin-bottom:30px}
+.info-list li{display:flex;gap:14px;align-items:flex-start;font-size:.96rem}
+.info-list .ic{width:42px;height:42px;border-radius:12px;background:var(--paper);display:grid;place-items:center;flex-shrink:0;font-size:1.1rem;box-shadow:0 4px 12px rgba(20,53,40,.08)}
+.info-list b{display:block;font-size:.8rem;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-soft);font-weight:600}
+.social-row{display:flex;gap:12px;align-items:center;margin-top:8px}
+.social-row img{width:40px;height:40px;border-radius:50%;transition:.25s}
+.social-row a:hover img{transform:scale(1.15)}
+.visit-photo{border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);aspect-ratio:4/3.4}
+.visit-photo img{width:100%;height:100%;object-fit:cover}
+@media(max-width:900px){.visit .wrap{grid-template-columns:1fr}}
+
+/* CTA */
+.cta-section{padding:0 0 96px;background:var(--cream)}
+.cta{background:linear-gradient(140deg,var(--sun),#f6b95c);text-align:center;border-radius:var(--radius);padding:70px 40px}
+.cta h2{font-size:clamp(1.8rem,3vw,2.4rem);color:var(--forest-deep);margin-bottom:14px}
+.cta p{color:rgba(20,53,40,.75);max-width:34rem;margin:0 auto 30px}
+.cta .btn{background:var(--forest-deep);color:#fff}
+.cta .btn:hover{background:var(--forest);transform:translateY(-3px)}
+
+/* FOOTER */
+footer{background:var(--forest-deep);color:rgba(255,255,255,.7);padding:60px 0 30px;font-size:.9rem}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:50px;margin-bottom:44px}
+footer h4{color:#fff;font-size:.85rem;text-transform:uppercase;letter-spacing:.1em;margin-bottom:16px}
+footer ul{list-style:none;display:grid;gap:10px}
+footer a{text-decoration:none;transition:.2s}
+footer a:hover{color:var(--sun)}
+.foot-bottom{border-top:1px solid rgba(255,255,255,.12);padding-top:24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:.8rem;color:rgba(255,255,255,.45)}
+@media(max-width:760px){.foot-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="nav-inner">
+    <a class="logo" href="#">
+      <div class="logo-mark">H</div>
+      <div class="logo-text"><b>Hilltop English School</b><span data-th="เชียงราย · โรงเรียนสอนภาษาอังกฤษ" data-en="Chiang Rai · English School">เชียงราย · โรงเรียนสอนภาษาอังกฤษ</span></div>
+    </a>
+    <ul class="nav-links">
+      <li class="pg"><a href="#story" data-th="เกี่ยวกับเรา" data-en="About Us">เกี่ยวกับเรา</a></li>
+      <li class="pg"><a href="#programs" data-th="คลาสเรียน" data-en="Classes">คลาสเรียน</a></li>
+      <li class="pg"><a href="#teacher" data-th="ครูของเรา" data-en="Our Teachers">ครูของเรา</a></li>
+      <li class="pg"><a href="#reviews" data-th="รีวิว" data-en="Reviews">รีวิว</a></li>
+      <li class="pg"><a href="#visit" data-th="ติดต่อเรา" data-en="Contact">ติดต่อเรา</a></li>
+      <li><a class="nav-cta" href="#visit" data-th="สมัครเรียน" data-en="Enroll Now">สมัครเรียน</a></li>
+      <li><div class="lang-toggle" id="langToggle" title="Change language"><span data-lang="th" class="on">ไทย</span><span data-lang="en">EN</span></div></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="wrap">
+    <div class="hero-content">
+      <span class="eyebrow" data-th="โรงเรียนสอนภาษาอังกฤษ · นางแล เชียงราย" data-en="English School · Nanglae, Chiang Rai">โรงเรียนสอนภาษาอังกฤษ · นางแล เชียงราย</span>
+      <h1 data-th='ที่ที่เด็ก ๆ ค้นพบ<br><em>โลกแห่งโอกาส</em>' data-en='Where children discover <em>a world of opportunities</em>'>ที่ที่เด็ก ๆ ค้นพบ<br><em>โลกแห่งโอกาส</em></h1>
+      <p class="lede" data-th="ผ่านเกม นิทาน เพลง และเสียงหัวเราะ ครูมืออาชีพที่ใส่ใจของเราช่วยให้เด็ก ๆ พูด อ่าน และเขียนภาษาอังกฤษได้อย่างมั่นใจ — และสนุกกับทุกนาทีของการเรียนรู้"
+         data-en="Through games, stories, songs and laughter, our caring, qualified teachers help kids learn to speak, read and write English — and love every minute of it.">ผ่านเกม นิทาน เพลง และเสียงหัวเราะ ครูมืออาชีพที่ใส่ใจของเราช่วยให้เด็ก ๆ พูด อ่าน และเขียนภาษาอังกฤษได้อย่างมั่นใจ — และสนุกกับทุกนาทีของการเรียนรู้</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#visit" data-th="ทดลองเรียนฟรี" data-en="Book a Free Trial Class">ทดลองเรียนฟรี</a>
+        <a class="btn btn-ghost" href="#programs" data-th="ดูคลาสเรียนของเรา" data-en="Explore Our Classes">ดูคลาสเรียนของเรา</a>
+      </div>
+      <p class="hero-note" data-th="เปิดสอน จันทร์–ศุกร์ 15:30 – 19:00 น. · มีคลาสสำหรับเด็กเล็ก และอายุ 12 ปีขึ้นไป"
+         data-en="Weekday classes 3:30 – 7:00 PM · Programs for young learners &amp; ages 12+">เปิดสอน จันทร์–ศุกร์ 15:30 – 19:00 น. · มีคลาสสำหรับเด็กเล็ก และอายุ 12 ปีขึ้นไป</p>
+    </div>
+  </div>
+  <div class="hero-scroll">▾</div>
+</header>
+
+<div class="stats">
+  <div class="wrap">
+    <div class="stats-band">
+      <div class="stat"><div class="num">100%</div><p data-th="เรียนรู้ผ่านการเล่น" data-en="Learning through play">เรียนรู้ผ่านการเล่น</p></div>
+      <div class="stat"><div class="num">4</div><p data-th="ทักษะภาษา ฟัง พูด อ่าน เขียน" data-en="Language skills mastered">ทักษะภาษา ฟัง พูด อ่าน เขียน</p></div>
+      <div class="stat"><div class="num">2</div><p data-th="โปรแกรม — เด็กเล็ก และ 12+" data-en="Programs — kids &amp; ages 12+">โปรแกรม — เด็กเล็ก และ 12+</p></div>
+      <div class="stat"><div class="num" data-th="จ–ศ" data-en="M–F">จ–ศ</div><p data-th="คลาสหลังเลิกเรียน 15:30–19:00 น." data-en="After-school classes, 3:30–7 PM">คลาสหลังเลิกเรียน 15:30–19:00 น.</p></div>
+    </div>
+  </div>
+</div>
+
+<section class="story" id="story">
+  <div class="wrap">
+    <div class="rv">
+      <span class="eyebrow" data-th="เรื่องราวของเรา" data-en="Our Story">เรื่องราวของเรา</span>
+      <h2 data-th="การศึกษาที่พิเศษ สร้างขึ้นจากความใส่ใจ" data-en="An extraordinary education, built on care">การศึกษาที่พิเศษ สร้างขึ้นจากความใส่ใจ</h2>
+      <p data-th="โรงเรียนฮิลล์ท็อปก่อตั้งโดย ปาลิตา — หรือที่นักเรียนเรียกว่า &laquo;ครูมายด์&raquo; — ผู้จบเกียรตินิยมอันดับหนึ่ง ศิลปศาสตรบัณฑิต (ภาษาอังกฤษ) จากมหาวิทยาลัยแม่ฟ้าหลวง และกลับมาที่นางแลด้วยความตั้งใจเดียว: มอบการศึกษาภาษาอังกฤษที่เปิดประตูสู่อนาคตให้กับเด็ก ๆ ในท้องถิ่น"
+         data-en="Hilltop English School was founded by Palita — known to her students as Teacher Mind — who earned first-class honors in her Bachelor of Arts in English from Mae Fah Luang University, and returned to Nanglae with a mission: give local children the kind of English education that opens doors.">โรงเรียนฮิลล์ท็อปก่อตั้งโดย ปาลิตา — หรือที่นักเรียนเรียกว่า &laquo;ครูมายด์&raquo; — ผู้จบเกียรตินิยมอันดับหนึ่ง ศิลปศาสตรบัณฑิต (ภาษาอังกฤษ) จากมหาวิทยาลัยแม่ฟ้าหลวง และกลับมาที่นางแลด้วยความตั้งใจเดียว: มอบการศึกษาภาษาอังกฤษที่เปิดประตูสู่อนาคตให้กับเด็ก ๆ ในท้องถิ่น</p>
+      <blockquote data-th="&ldquo;เมื่อเด็กเรียนรู้ผ่านการเล่น พวกเขาไม่ได้แค่จำภาษาอังกฤษได้ — แต่ตกหลุมรักมัน&rdquo;" data-en="&ldquo;When children learn through play, they don't just remember English — they fall in love with it.&rdquo;">&ldquo;เมื่อเด็กเรียนรู้ผ่านการเล่น พวกเขาไม่ได้แค่จำภาษาอังกฤษได้ — แต่ตกหลุมรักมัน&rdquo;</blockquote>
+      <p data-th="ทุกบทเรียนที่ฮิลล์ท็อปเป็นการเรียนรู้แบบมีส่วนร่วม เกม นิทาน เพลง และการเต้นรำ เปลี่ยนการฝึกฟัง พูด อ่าน เขียน ให้กลายเป็นการผจญภัยที่เด็ก ๆ รอคอย — ภายใต้การดูแลของครูมากประสบการณ์ รวมถึงครูเจ้าของภาษา"
+         data-en="Every lesson at Hilltop is interactive. Games, fairy tales, songs and dancing turn listening, speaking, reading and writing into adventures children look forward to — guided by experienced, qualified teachers, including native English speakers.">ทุกบทเรียนที่ฮิลล์ท็อปเป็นการเรียนรู้แบบมีส่วนร่วม เกม นิทาน เพลง และการเต้นรำ เปลี่ยนการฝึกฟัง พูด อ่าน เขียน ให้กลายเป็นการผจญภัยที่เด็ก ๆ รอคอย — ภายใต้การดูแลของครูมากประสบการณ์ รวมถึงครูเจ้าของภาษา</p>
+    </div>
+    <div class="rv">
+      <div class="board" id="board">
+        <div class="dia"><div class="dia-inner">
+          <div class="dia-face dia-front"><img src="assets/img/tile-senses.jpg" alt=""><div class="dia-label" data-th="ประสาทสัมผัส" data-en="Sensory Play">ประสาทสัมผัส</div></div>
+          <div class="dia-face dia-back bg-1"><div class="in"><b data-th="เรียนผ่านสัมผัส" data-en="Learning by Touch">เรียนผ่านสัมผัส</b><span data-th="ฝึกเขียนตัวอักษรผ่านกิจกรรมสนุก ๆ" data-en="Tracing letters through playful activities">ฝึกเขียนตัวอักษรผ่านกิจกรรมสนุก ๆ</span></div></div>
+        </div></div>
+        <div class="dia"><div class="dia-inner">
+          <div class="dia-face dia-front"><img src="assets/img/tile-paint.jpg" alt=""><div class="dia-label" data-th="ศิลปะ" data-en="Art">ศิลปะ</div></div>
+          <div class="dia-face dia-back bg-2"><div class="in"><b data-th="สร้างสรรค์" data-en="Get Creative">สร้างสรรค์</b><span data-th="ศิลปะและงานฝีมือ พร้อมคำศัพท์ใหม่" data-en="Arts &amp; crafts, with new English words">ศิลปะและงานฝีมือ พร้อมคำศัพท์ใหม่</span></div></div>
+        </div></div>
+        <div class="dia"><div class="dia-inner">
+          <div class="dia-face dia-front"><img src="assets/img/tile-read.jpg" alt=""><div class="dia-label" data-th="อ่านหนังสือ" data-en="Reading">อ่านหนังสือ</div></div>
+          <div class="dia-face dia-back bg-3"><div class="in"><b data-th="รักการอ่าน" data-en="Love of Reading">รักการอ่าน</b><span data-th="จากโฟนิกส์สู่นิทานภาษาอังกฤษ" data-en="From phonics to English storybooks">จากโฟนิกส์สู่นิทานภาษาอังกฤษ</span></div></div>
+        </div></div>
+        <div class="dia"><div class="dia-inner">
+          <div class="dia-face dia-front"><img src="assets/img/tile-cook.jpg" alt=""><div class="dia-label" data-th="ทำอาหาร" data-en="Cooking">ทำอาหาร</div></div>
+          <div class="dia-face dia-back bg-4"><div class="in"><b data-th="ครัวเล็ก ๆ" data-en="Little Chefs">ครัวเล็ก ๆ</b><span data-th="เรียนคำศัพท์ผ่านการทำขนม" data-en="Vocabulary through cooking together">เรียนคำศัพท์ผ่านการทำขนม</span></div></div>
+        </div></div>
+        <div class="dia"><div class="dia-inner">
+          <div class="dia-face dia-front"><img src="assets/img/tile-outdoor.jpg" alt=""><div class="dia-label" data-th="กีฬา" data-en="Sports">กีฬา</div></div>
+          <div class="dia-face dia-back bg-3"><div class="in"><b data-th="เล่นข้างนอก" data-en="Outdoor Fun">เล่นข้างนอก</b><span data-th="กีฬาและเกมกลางแจ้งเป็นภาษาอังกฤษ" data-en="Sports &amp; games — all in English">กีฬาและเกมกลางแจ้งเป็นภาษาอังกฤษ</span></div></div>
+        </div></div>
+        <div class="dia"><div class="dia-inner">
+          <div class="dia-face dia-front"><img src="assets/img/tile-nature.jpg" alt=""><div class="dia-label" data-th="ธรรมชาติ" data-en="Nature">ธรรมชาติ</div></div>
+          <div class="dia-face dia-back bg-1"><div class="in"><b data-th="ทัศนศึกษา" data-en="Field Trips">ทัศนศึกษา</b><span data-th="ผจญภัยและเรียนรู้นอกห้องเรียน" data-en="Adventures beyond the classroom">ผจญภัยและเรียนรู้นอกห้องเรียน</span></div></div>
+        </div></div>
+        <div class="dia"><div class="dia-inner">
+          <div class="dia-face dia-front"><img src="assets/img/tile-mud.jpg" alt=""><div class="dia-label" data-th="ลงมือทำ" data-en="Hands-On">ลงมือทำ</div></div>
+          <div class="dia-face dia-back bg-2"><div class="in"><b data-th="กล้าเลอะ กล้าเรียนรู้" data-en="Messy &amp; Proud">กล้าเลอะ กล้าเรียนรู้</b><span data-th="การทดลองที่ทำให้จำได้ไม่ลืม" data-en="Experiences kids never forget">การทดลองที่ทำให้จำได้ไม่ลืม</span></div></div>
+        </div></div>
+        <div class="dia"><div class="dia-inner">
+          <div class="dia-face dia-front"><img src="assets/img/tile-party.jpg" alt=""><div class="dia-label" data-th="เทศกาล" data-en="Celebrations">เทศกาล</div></div>
+          <div class="dia-face dia-back bg-4"><div class="in"><b data-th="ความสุขทุกเทศกาล" data-en="Every Festival">ความสุขทุกเทศกาล</b><span data-th="วัฒนธรรมและปาร์ตี้ภาษาอังกฤษ" data-en="Culture, parties &amp; English cheer">วัฒนธรรมและปาร์ตี้ภาษาอังกฤษ</span></div></div>
+        </div></div>
+      </div>
+      <p class="play-hint" data-th="✦ ลองแตะการ์ดดูสิ! ✦" data-en="✦ Tap the cards to play! ✦">✦ ลองแตะการ์ดดูสิ! ✦</p>
+    </div>
+  </div>
+</section>
+
+<section class="programs" id="programs">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="eyebrow" data-th="สิ่งที่เราสอน" data-en="What We Teach">สิ่งที่เราสอน</span>
+      <h2 data-th="4 ทักษะ หนึ่งการเดินทางที่เต็มไปด้วยความสุข" data-en="Four skills. One joyful journey.">4 ทักษะ หนึ่งการเดินทางที่เต็มไปด้วยความสุข</h2>
+      <p data-th="หลักสูตรของเราสร้างความสามารถภาษาอังกฤษอย่างครบถ้วน ทีละขั้น ในทุกช่วงวัย เพื่อให้เด็ก ๆ มั่นใจในทุกด้านของการใช้ภาษา"
+         data-en="Our curriculum builds complete English ability — step by step, at every age — so children grow confident in every way they use the language.">หลักสูตรของเราสร้างความสามารถภาษาอังกฤษอย่างครบถ้วน ทีละขั้น ในทุกช่วงวัย เพื่อให้เด็ก ๆ มั่นใจในทุกด้านของการใช้ภาษา</p>
+    </div>
+    <div class="cards">
+      <div class="card rv">
+        <div class="icon i-1">👂</div>
+        <h3 data-th="การฟัง" data-en="Listening">การฟัง</h3>
+        <p data-th="เพลง นิทาน และบทสนทนาจริง ฝึกหูน้อย ๆ ให้เข้าใจภาษาอังกฤษตั้งแต่วันแรก" data-en="Songs, stories and natural conversation train young ears to understand real English from day one.">เพลง นิทาน และบทสนทนาจริง ฝึกหูน้อย ๆ ให้เข้าใจภาษาอังกฤษตั้งแต่วันแรก</p>
+      </div>
+      <div class="card rv">
+        <div class="icon i-2">💬</div>
+        <h3 data-th="การพูด" data-en="Speaking">การพูด</h3>
+        <p data-th="เกมและบทบาทสมมติ สร้างความกล้าให้เด็กทุกคนพูดออกมา — พร้อมครูเจ้าของภาษาคอยแนะนำ" data-en="Games and role-play give every child the confidence to speak up — with native-speaker teachers to guide them.">เกมและบทบาทสมมติ สร้างความกล้าให้เด็กทุกคนพูดออกมา — พร้อมครูเจ้าของภาษาคอยแนะนำ</p>
+      </div>
+      <div class="card rv">
+        <div class="icon i-3">📚</div>
+        <h3 data-th="การอ่าน" data-en="Reading">การอ่าน</h3>
+        <p data-th="จากโฟนิกส์สู่นิทาน เด็ก ๆ ค้นพบความสุขของการอ่านภาษาอังกฤษด้วยตัวเอง" data-en="From phonics to fairy tales, children discover the joy of reading English on their own.">จากโฟนิกส์สู่นิทาน เด็ก ๆ ค้นพบความสุขของการอ่านภาษาอังกฤษด้วยตัวเอง</p>
+      </div>
+      <div class="card rv">
+        <div class="icon i-4">✏️</div>
+        <h3 data-th="การเขียน" data-en="Writing">การเขียน</h3>
+        <p data-th="กิจกรรมสร้างสรรค์เปลี่ยนการฝึกเขียนให้เป็นการแสดงออกที่เด็ก ๆ ภูมิใจ" data-en="Creative, hands-on activities turn writing practice into self-expression children are proud of.">กิจกรรมสร้างสรรค์เปลี่ยนการฝึกเขียนให้เป็นการแสดงออกที่เด็ก ๆ ภูมิใจ</p>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:48px" class="rv">
+      <a class="btn btn-outline" href="#" data-th="ดูคลาสทั้งหมด และโปรแกรมอายุ 12+" data-en="See All Classes &amp; the Age 12+ Program">ดูคลาสทั้งหมด และโปรแกรมอายุ 12+</a>
+    </div>
+  </div>
+</section>
+
+<section class="teacher" id="teacher">
+  <div class="wrap">
+    <div class="teacher-photos rv">
+      <div class="main"><img src="assets/img/teacher.jpg" alt="Teacher helping a young student"></div>
+      <div class="small"><img src="assets/img/awards.jpg" alt="Students receiving awards"></div>
+    </div>
+    <div class="rv">
+      <span class="eyebrow" data-th="พบกับครูของเรา" data-en="Meet Our Teachers">พบกับครูของเรา</span>
+      <h2 data-th="นำโดยครูมายด์ — และทีมครูที่ใส่ใจอย่างแท้จริง" data-en="Led by Teacher Mind — and a team that truly cares">นำโดยครูมายด์ — และทีมครูที่ใส่ใจอย่างแท้จริง</h2>
+      <p data-th="ครูปาลิตา &laquo;ครูมายด์&raquo; ผู้ก่อตั้ง จบเกียรตินิยมอันดับหนึ่งด้านภาษาอังกฤษจากมหาวิทยาลัยแม่ฟ้าหลวง นำทีมครูมากประสบการณ์ — รวมถึงครูเจ้าของภาษา — ที่มาพร้อมความเชี่ยวชาญ ความอดทน และความอบอุ่นจริงใจในทุกคลาส"
+         data-en='Founder Palita "Teacher Mind" graduated with first-class honors in English from Mae Fah Luang University. She leads a team of experienced, qualified teachers — including native English speakers — who bring expertise, patience and genuine warmth to every class.'>ครูปาลิตา &laquo;ครูมายด์&raquo; ผู้ก่อตั้ง จบเกียรตินิยมอันดับหนึ่งด้านภาษาอังกฤษจากมหาวิทยาลัยแม่ฟ้าหลวง นำทีมครูมากประสบการณ์ — รวมถึงครูเจ้าของภาษา — ที่มาพร้อมความเชี่ยวชาญ ความอดทน และความอบอุ่นจริงใจในทุกคลาส</p>
+      <div class="cred"><span class="badge">🎓</span><div><b data-th="เกียรตินิยมอันดับหนึ่ง ศศ.บ. ภาษาอังกฤษ" data-en="First-Class Honors, B.A. English">เกียรตินิยมอันดับหนึ่ง ศศ.บ. ภาษาอังกฤษ</b><span data-th="มหาวิทยาลัยแม่ฟ้าหลวง" data-en="Mae Fah Luang University">มหาวิทยาลัยแม่ฟ้าหลวง</span></div></div>
+      <div class="cred"><span class="badge">🌏</span><div><b data-th="ครูเจ้าของภาษา" data-en="Native-Speaker Teachers">ครูเจ้าของภาษา</b><span data-th="มากประสบการณ์ มีคุณวุฒิ และรักการสอนเด็ก" data-en="Experienced, qualified, and passionate about teaching children">มากประสบการณ์ มีคุณวุฒิ และรักการสอนเด็ก</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="quotes" id="reviews">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="eyebrow" data-th="เสียงจากครอบครัวของเรา" data-en="From Our Families">เสียงจากครอบครัวของเรา</span>
+      <h2 data-th="เรื่องราวที่ผู้ปกครองอยากเล่าต่อ" data-en="Stories parents love to tell">เรื่องราวที่ผู้ปกครองอยากเล่าต่อ</h2>
+      <p data-th="(รีวิวตัวอย่าง — จะแทนที่ด้วยรีวิวจริงจากครอบครัวฮิลล์ท็อป)" data-en="(Placeholder testimonials — we'll replace these with real reviews from Hilltop families.)">(รีวิวตัวอย่าง — จะแทนที่ด้วยรีวิวจริงจากครอบครัวฮิลล์ท็อป)</p>
+    </div>
+    <div class="cards3">
+      <div class="quote rv">
+        <div class="stars">★★★★★</div>
+        <p data-th="&ldquo;ลูกสาวเคยอายไม่กล้าพูดภาษาอังกฤษ ตอนนี้ร้องเพลงภาษาอังกฤษที่บ้านทุกวัน และตั้งตารอไปเรียนทุกครั้ง&rdquo;" data-en="&ldquo;My daughter used to be shy about English. Now she sings English songs at home every day and can't wait for class.&rdquo;">&ldquo;ลูกสาวเคยอายไม่กล้าพูดภาษาอังกฤษ ตอนนี้ร้องเพลงภาษาอังกฤษที่บ้านทุกวัน และตั้งตารอไปเรียนทุกครั้ง&rdquo;</p>
+        <div class="who"><div class="avatar a1">น</div><div><b data-th="ผู้ปกครองนักเรียนเด็กเล็ก" data-en="Parent of a young learner">ผู้ปกครองนักเรียนเด็กเล็ก</b><span data-th="นางแล เชียงราย" data-en="Nanglae, Chiang Rai">นางแล เชียงราย</span></div></div>
+      </div>
+      <div class="quote rv">
+        <div class="stars">★★★★★</div>
+        <p data-th="&ldquo;ครูมายด์ทำให้เด็กทุกคนรู้สึกพิเศษ คุณครูใจเย็น เป็นมืออาชีพ และเด็ก ๆ สนุกกับการเรียนจริง ๆ&rdquo;" data-en="&ldquo;Teacher Mind makes every child feel special. The teachers are patient, professional, and the kids genuinely have fun while learning.&rdquo;">&ldquo;ครูมายด์ทำให้เด็กทุกคนรู้สึกพิเศษ คุณครูใจเย็น เป็นมืออาชีพ และเด็ก ๆ สนุกกับการเรียนจริง ๆ&rdquo;</p>
+        <div class="who"><div class="avatar a2">ส</div><div><b data-th="ผู้ปกครองฮิลล์ท็อป" data-en="Hilltop parent">ผู้ปกครองฮิลล์ท็อป</b><span data-th="เชียงราย" data-en="Chiang Rai">เชียงราย</span></div></div>
+      </div>
+      <div class="quote rv">
+        <div class="stars">★★★★★</div>
+        <p data-th="&ldquo;แค่เทอมเดียว ลูกชายเริ่มอ่านนิทานภาษาอังกฤษเองได้ เราทึ่งกับพัฒนาการและความมั่นใจของเขามาก&rdquo;" data-en="&ldquo;In just one term my son started reading English storybooks by himself. We are amazed at his progress and confidence.&rdquo;">&ldquo;แค่เทอมเดียว ลูกชายเริ่มอ่านนิทานภาษาอังกฤษเองได้ เราทึ่งกับพัฒนาการและความมั่นใจของเขามาก&rdquo;</p>
+        <div class="who"><div class="avatar a3">พ</div><div><b data-th="ผู้ปกครอง โปรแกรมอายุ 12+" data-en="Parent, Age 12+ program">ผู้ปกครอง โปรแกรมอายุ 12+</b><span data-th="เมืองเชียงราย" data-en="Muang Chiang Rai">เมืองเชียงราย</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="visit" id="visit">
+  <div class="wrap">
+    <div class="rv">
+      <span class="eyebrow" data-th="มาเยี่ยมเรา" data-en="Visit Us">มาเยี่ยมเรา</span>
+      <h2 data-th="มาดูบรรยากาศคลาสเรียนจริงของเรา" data-en="Come see a class in action">มาดูบรรยากาศคลาสเรียนจริงของเรา</h2>
+      <p data-th="วิธีที่ดีที่สุดที่จะรู้จักฮิลล์ท็อปคือมาเยี่ยมเรา แวะมาช่วงเวลาเรียน โทรหาเรา หรือส่งข้อความ — เรายินดีต้อนรับทุกครอบครัว"
+         data-en="The best way to know Hilltop is to visit. Stop by during class hours, call us, or send a message — we'd love to welcome your family.">วิธีที่ดีที่สุดที่จะรู้จักฮิลล์ท็อปคือมาเยี่ยมเรา แวะมาช่วงเวลาเรียน โทรหาเรา หรือส่งข้อความ — เรายินดีต้อนรับทุกครอบครัว</p>
+      <ul class="info-list">
+        <li><div class="ic">📍</div><div><b data-th="ที่อยู่" data-en="Address">ที่อยู่</b><span data-th="118 หมู่ 4 ซอย 1 หมู่บ้านเมืองคำ ต.นางแล อ.เมือง จ.เชียงราย 57100" data-en="118 M.4 Soi 1, Muangkham Village, T. Nanglae, A. Muang, Chiang Rai 57100">118 หมู่ 4 ซอย 1 หมู่บ้านเมืองคำ ต.นางแล อ.เมือง จ.เชียงราย 57100</span></div></li>
+        <li><div class="ic">🕒</div><div><b data-th="เวลาเรียน" data-en="Class Hours">เวลาเรียน</b><span data-th="จันทร์ – ศุกร์ 15:30 – 19:00 น." data-en="Monday – Friday, 3:30 PM – 7:00 PM">จันทร์ – ศุกร์ 15:30 – 19:00 น.</span></div></li>
+        <li><div class="ic">📞</div><div><b data-th="โทรศัพท์" data-en="Phone">โทรศัพท์</b><span>+66 82 196 9589</span></div></li>
+        <li><div class="ic">✉️</div><div><b data-th="อีเมล" data-en="Email">อีเมล</b><span>Hilltopchiangrai@gmail.com</span></div></li>
+      </ul>
+      <div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap">
+        <a class="btn btn-primary" href="tel:+66821969589" data-th="โทรหาเราวันนี้" data-en="Call Us Today">โทรหาเราวันนี้</a>
+        <div class="social-row">
+          <a href="#" title="Facebook"><img src="assets/img/facebook.png" alt="Facebook"></a>
+          <a href="#" title="LINE"><img src="assets/img/line.png" alt="LINE"></a>
+        </div>
+      </div>
+    </div>
+    <div class="visit-photo rv"><img src="assets/img/story.jpg" alt="Hilltop student"></div>
+  </div>
+</section>
+
+<div class="cta-section">
+  <div class="wrap">
+    <div class="cta rv">
+      <h2 data-th="มอบโลกแห่งโอกาสให้ลูกของคุณ" data-en="Give your child a world of opportunities">มอบโลกแห่งโอกาสให้ลูกของคุณ</h2>
+      <p data-th="ที่นั่งในแต่ละคลาสมีจำกัด เพื่อให้เด็กทุกคนได้รับการดูแลอย่างใกล้ชิด สมัครวันนี้ หรือจองทดลองเรียนฟรี"
+         data-en="Spaces in each class are limited so every child gets personal attention. Register today or book a free trial lesson.">ที่นั่งในแต่ละคลาสมีจำกัด เพื่อให้เด็กทุกคนได้รับการดูแลอย่างใกล้ชิด สมัครวันนี้ หรือจองทดลองเรียนฟรี</p>
+      <a class="btn" href="#visit" data-th="สมัครเรียนให้ลูกของคุณ" data-en="Register Your Child">สมัครเรียนให้ลูกของคุณ</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="logo" href="#">
+          <div class="logo-mark">H</div>
+          <div class="logo-text"><b style="color:#fff">Hilltop English School</b><span style="color:rgba(255,255,255,.5)" data-th="เชียงราย ประเทศไทย" data-en="Chiang Rai, Thailand">เชียงราย ประเทศไทย</span></div>
+        </a>
+        <p style="margin-top:14px;max-width:26rem" data-th="ช่วยให้เด็ก ๆ พูด อ่าน เขียนภาษาอังกฤษผ่านการเล่น — กับครูมืออาชีพที่ใส่ใจ ที่นางแล เชียงราย"
+           data-en="Helping children learn to speak, read and write English through play — with caring, qualified teachers in Nanglae, Chiang Rai.">ช่วยให้เด็ก ๆ พูด อ่าน เขียนภาษาอังกฤษผ่านการเล่น — กับครูมืออาชีพที่ใส่ใจ ที่นางแล เชียงราย</p>
+      </div>
+      <div>
+        <h4 data-th="เมนู" data-en="Explore">เมนู</h4>
+        <ul>
+          <li><a href="#story" data-th="เกี่ยวกับเรา" data-en="About Us">เกี่ยวกับเรา</a></li>
+          <li><a href="#programs" data-th="คลาสเรียน" data-en="Classes">คลาสเรียน</a></li>
+          <li><a href="#" data-th="โปรแกรมอายุ 12+" data-en="Age 12+ Program">โปรแกรมอายุ 12+</a></li>
+          <li><a href="#" data-th="สมัครเรียน" data-en="Registration">สมัครเรียน</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 data-th="ติดต่อ" data-en="Contact">ติดต่อ</h4>
+        <ul>
+          <li><a href="tel:+66821969589">+66 82 196 9589</a></li>
+          <li><a href="mailto:Hilltopchiangrai@gmail.com">Hilltopchiangrai@gmail.com</a></li>
+          <li data-th="จันทร์–ศุกร์ · 15:30 – 19:00 น." data-en="Mon–Fri · 3:30 – 7:00 PM">จันทร์–ศุกร์ · 15:30 – 19:00 น.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span data-th="© 2026 โรงเรียนสอนภาษาอังกฤษฮิลล์ท็อป สงวนลิขสิทธิ์" data-en="© 2026 Hilltop English School. All rights reserved.">© 2026 โรงเรียนสอนภาษาอังกฤษฮิลล์ท็อป สงวนลิขสิทธิ์</span>
+      <span data-th="Discover a world of opportunities" data-en="Discover a world of opportunities.">Discover a world of opportunities</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ---- language toggle (Thai default) ----
+const toggle=document.getElementById('langToggle');
+function setLang(lang){
+  document.documentElement.lang=lang;
+  document.querySelectorAll('[data-th]').forEach(el=>{
+    el.innerHTML=el.dataset[lang]||el.innerHTML;
+  });
+  toggle.querySelectorAll('span').forEach(s=>s.classList.toggle('on',s.dataset.lang===lang));
+  try{localStorage.setItem('hilltop-lang',lang)}catch(e){}
+}
+toggle.addEventListener('click',()=>{
+  setLang(document.documentElement.lang==='th'?'en':'th');
+});
+let saved='th';try{saved=localStorage.getItem('hilltop-lang')||'th'}catch(e){}
+if(saved!=='th')setLang(saved);
+
+// ---- sticky nav ----
+const nav=document.getElementById('nav');
+addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>40),{passive:true});
+
+// ---- scroll reveal ----
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.15});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+
+// ---- playable diamond board ----
+document.querySelectorAll('.dia').forEach(d=>{
+  d.addEventListener('click',()=>{
+    d.classList.toggle('flip');
+    d.style.animationPlayState=d.classList.contains('flip')?'paused':'running';
+  });
+});
+</script>
+</body>
+</html>
