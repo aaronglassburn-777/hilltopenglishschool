@@ -129,13 +129,12 @@ if(slides.length>1){
   nums.forEach(n=>ob.observe(n));
 })();
 
-// ---- video clips: play on hover / when visible, open full video ----
+// ---- video clips: play when visible; #playFull / .clip open the #lightbox ----
 (function(){
   const clips=document.querySelectorAll('.clip video');
-  if(!clips.length)return;
-  const vo=new IntersectionObserver(es=>es.forEach(e=>{const v=e.target;if(e.isIntersecting){v.play().catch(()=>{})}else v.pause()}),{threshold:.4});
-  clips.forEach(v=>vo.observe(v));
+  if(clips.length){const vo=new IntersectionObserver(es=>es.forEach(e=>{const v=e.target;if(e.isIntersecting){v.play().catch(()=>{})}else v.pause()}),{threshold:.4});clips.forEach(v=>vo.observe(v));}
   const lb=document.getElementById('lightbox'),fv=document.getElementById('fullVideo');
+  if(!lb||!fv)return;
   function open(){lb.hidden=false;document.body.style.overflow='hidden';fv.play().catch(()=>{})}
   function close(){fv.pause();lb.hidden=true;document.body.style.overflow=''}
   document.querySelectorAll('.clip,#playFull').forEach(b=>b.addEventListener('click',open));
