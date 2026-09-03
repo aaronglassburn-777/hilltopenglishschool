@@ -902,3 +902,8 @@ html,body{max-width:100%;overflow-x:clip}
 .teacher-photos .small{width:36%;right:auto;left:-26px;bottom:0;aspect-ratio:1/1.15;rotate:-3deg;transition:rotate .5s,transform .5s}
 .teacher-photos:hover .small{rotate:0deg;transform:translateY(-6px)}
 @media(max-width:900px){.teacher-photos .small{left:0}}
+
+/* Tighter rhythm between For Parents and the parent stories */
+.for-parents{padding-bottom:56px}
+.quotes{padding-top:64px}
+@media(max-width:640px){.for-parents{padding-bottom:40px}.quotes{padding-top:48px}}
