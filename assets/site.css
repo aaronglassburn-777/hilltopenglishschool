@@ -297,19 +297,6 @@ footer a:hover{color:var(--sun)}
 .b1{width:520px;height:520px;left:-160px;top:-120px;background:radial-gradient(circle,var(--sun-soft),transparent 70%)}
 .b2{width:600px;height:600px;right:-200px;bottom:-200px;background:radial-gradient(circle,#cfe4d7,transparent 70%);animation-delay:-9s}
 @keyframes blobDrift{from{transform:translate(0,0) scale(1)}to{transform:translate(60px,40px) scale(1.15)}}
-.fl{position:absolute;font-family:var(--f-head);font-weight:700;color:var(--forest);opacity:.08;user-select:none;animation:flFloat var(--d,14s) ease-in-out infinite alternate,flSpin calc(var(--d,14s)*2.3) linear infinite;will-change:transform}
-@keyframes flFloat{from{translate:0 0}to{translate:var(--x,20px) var(--y,-60px)}}
-@keyframes flSpin{from{rotate:calc(var(--r,0deg) - 6deg)}to{rotate:calc(var(--r,0deg) + 6deg)}}
-.f1{left:4%;top:12%;font-size:9rem;--d:16s;--x:30px;--y:-50px;--r:-12deg}
-.f2{left:22%;top:70%;font-size:7rem;--d:13s;--x:-25px;--y:-70px;--r:8deg;color:var(--clay)}
-.f3{right:8%;top:8%;font-size:8rem;--d:19s;--x:-40px;--y:40px;--r:10deg;color:var(--sun)}
-.f4{right:30%;top:78%;font-size:5rem;--d:12s;--x:35px;--y:-45px;--r:-25deg;color:var(--clay)}
-.f5{left:46%;top:6%;font-size:4rem;--d:11s;--x:20px;--y:30px;--r:15deg;color:var(--sun)}
-.f6{left:66%;top:20%;font-size:6rem;--d:17s;--x:-30px;--y:-40px;--r:-6deg}
-.f7{left:10%;top:44%;font-size:6.5rem;--d:15s;--x:25px;--y:35px;--r:12deg;color:var(--leaf)}
-.f8{right:4%;top:48%;font-size:5rem;--d:14s;--x:-20px;--y:-60px;--r:-20deg;color:var(--clay)}
-.f9{left:82%;top:86%;font-size:7rem;--d:18s;--x:-35px;--y:-30px;--r:6deg}
-.f10{left:34%;top:30%;font-size:4.5rem;--d:10s;--x:30px;--y:-40px;--r:-10deg;color:var(--leaf)}
 .card-photo{padding:0;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 6px 22px rgba(20,53,40,.06)}
 .card-photo:hover{transform:translateY(-10px);box-shadow:0 22px 50px rgba(20,53,40,.16)}
 .card-img{position:relative;aspect-ratio:4/3}
@@ -321,7 +308,6 @@ footer a:hover{color:var(--sun)}
 .card-body{padding:42px 26px 30px;position:relative}
 .card-body::before{content:"";position:absolute;left:26px;top:0;width:0;height:3px;background:var(--sun);border-radius:3px;transition:width .5s ease .1s}
 .card-photo:hover .card-body::before{width:56px}
-@media(max-width:560px){.fl{font-size:4rem!important}}
 @media(prefers-reduced-motion:reduce){.fl,.blob{animation:none}.card-img img{transition:none}}
 .card-img-clip{position:absolute;inset:0;overflow:hidden}
 
@@ -478,9 +464,73 @@ html,body{max-width:100%;overflow-x:clip}
 
 /* ===== Diamond board: animated gradient ring on hover / tap ===== */
 @property --ring{syntax:"<angle>";inherits:false;initial-value:0deg}
-.dia::after{content:"";position:absolute;inset:-6px;border-radius:24%;z-index:5;opacity:0;transition:opacity .35s,scale .45s cubic-bezier(.34,1.56,.64,1);pointer-events:none;padding:5px;box-sizing:border-box;
+.dia::after{content:"";position:absolute;inset:-6px;border-radius:24%;z-index:5;opacity:0;transition:opacity .35s,inset .45s cubic-bezier(.34,1.56,.64,1);pointer-events:none;padding:5px;box-sizing:border-box;
   background:conic-gradient(from var(--ring),var(--sun),var(--clay),#ff5ea8,var(--leaf),var(--sun));
   -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);mask-composite:exclude;
-  animation:ringSpin 2.2s linear infinite}
-.dia:hover::after,.dia.flip::after{opacity:1;scale:1.32}
+}
+.dia:hover::after,.dia.flip::after{opacity:1;inset:calc(-16% - 9px);animation:ringSpin 2.2s linear infinite}
 @keyframes ringSpin{to{--ring:360deg}}
+
+/* ===== Visit carousel caption ===== */
+.rs-cap{position:absolute;left:0;right:0;bottom:0;z-index:3;padding:14px 18px;background:linear-gradient(to top,rgba(20,53,40,.85),rgba(20,53,40,0));color:#fff;font-family:var(--f-head);display:flex;align-items:center;gap:10px;border-radius:0 0 var(--radius) var(--radius)}
+.rs-cap small{display:block;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--sun-soft);font-weight:700}
+.rs-cap b{display:block;font-size:1rem;font-weight:600;transition:opacity .4s}
+.rs-cap b.fade{opacity:0}
+.rs-cap .dot{width:10px;height:10px;border-radius:50%;background:var(--sun);flex-shrink:0;animation:capPulse 1.6s ease-in-out infinite}
+@keyframes capPulse{0%,100%{box-shadow:0 0 0 0 rgba(244,168,61,.7)}70%{box-shadow:0 0 0 9px rgba(244,168,61,0)}}
+
+/* ===== Hilly the sheep (mascot) ===== */
+.thai-hero .wrap{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:48px;align-items:center}
+.hilly-wrap{position:relative;display:grid;place-items:end center;min-height:380px;padding-bottom:40px}
+.hilly{width:min(100%,400px);height:auto;overflow:visible;position:relative;z-index:1;animation:hillyBob 3.2s ease-in-out infinite;transform-origin:50% 100%}
+@keyframes hillyBob{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-6px) rotate(-1deg)}}
+.hilly .eye-lid{transform-origin:center;animation:blink 4.6s infinite}
+@keyframes blink{0%,92%,100%{transform:scaleY(0)}95%{transform:scaleY(1)}}
+.hilly .ear-l{transform-origin:100% 40%;animation:earL 5s ease-in-out infinite}
+.hilly .ear-r{transform-origin:0 40%;animation:earR 5s ease-in-out infinite}
+@keyframes earL{0%,80%,100%{transform:rotate(0)}88%{transform:rotate(-14deg)}}
+@keyframes earR{0%,80%,100%{transform:rotate(0)}90%{transform:rotate(14deg)}}
+.hilly .mouth-open{opacity:0}
+.hilly.talking .mouth-open{animation:talk .28s steps(1) infinite}
+.hilly.talking .mouth-closed{animation:talkC .28s steps(1) infinite}
+@keyframes talk{0%,49%{opacity:0}50%,100%{opacity:1}}
+@keyframes talkC{0%,49%{opacity:1}50%,100%{opacity:0}}
+.hilly .glasses-shine{animation:shine 6s ease-in-out infinite}
+@keyframes shine{0%,85%,100%{opacity:0}90%{opacity:.9}}
+.hilly .wool{animation:woolBreathe 3.2s ease-in-out infinite;transform-origin:60% 55%}
+.hilly .tail{transform-origin:336px 150px;animation:tailWag 1.4s ease-in-out infinite}
+@keyframes tailWag{0%,100%{transform:rotate(0)}50%{transform:rotate(18deg)}}
+.bubble{left:30%}
+@keyframes woolBreathe{0%,100%{transform:scale(1)}50%{transform:scale(1.025)}}
+.bubble{position:absolute;top:0;left:50%;translate:-50% 0;width:min(100%,320px);background:#fff;color:var(--forest-deep);border-radius:22px;padding:16px 20px;font-family:var(--f-head);font-size:1.05rem;line-height:1.45;box-shadow:0 16px 40px rgba(0,0,0,.35);z-index:2;min-height:74px;opacity:0;scale:.85;transform-origin:50% 100%;transition:opacity .35s,scale .35s cubic-bezier(.34,1.56,.64,1)}
+.bubble.show{opacity:1;scale:1}
+.bubble::after{content:"";position:absolute;bottom:-12px;left:50%;width:22px;height:22px;background:#fff;rotate:45deg;translate:-50% 0;border-radius:4px}
+.bubble .lang{position:absolute;top:-10px;right:14px;background:var(--sun);color:var(--forest-deep);font-size:.68rem;font-weight:700;letter-spacing:.1em;padding:3px 9px;border-radius:999px}
+.bubble .cursor{display:inline-block;width:2px;height:1em;background:var(--clay);vertical-align:-2px;margin-left:2px;animation:cur .8s steps(1) infinite}
+@keyframes cur{50%{opacity:0}}
+.hilly-name{position:absolute;bottom:-34px;left:50%;translate:-50% 0;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);color:#fff;font-family:var(--f-head);font-size:.8rem;padding:5px 14px;border-radius:999px;backdrop-filter:blur(6px);white-space:nowrap}
+.hilly-wrap .ground{position:absolute;bottom:14px;left:55%;translate:-50% 0;width:76%;height:26px;border-radius:50%;background:rgba(0,0,0,.35);filter:blur(8px)}
+@media(max-width:860px){.thai-hero .wrap{grid-template-columns:1fr}.hilly-wrap{min-height:340px;margin-top:20px}}
+@media(prefers-reduced-motion:reduce){.hilly,.hilly *{animation:none!important}}
+
+/* ===== FAQ with Hilly ===== */
+.faq-grid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);gap:48px;align-items:start}
+.faq-grid .faq{max-width:none;margin:0}
+.faq-grid .hilly-wrap{position:sticky;top:110px;min-height:420px}
+.faq-grid .bubble{color:var(--forest-deep);box-shadow:0 16px 40px rgba(20,53,40,.18);border:1px solid rgba(30,77,59,.08)}
+.faq-grid .hilly-name{background:var(--forest);border-color:var(--forest)}
+.faq-grid .ground{background:rgba(20,53,40,.18)}
+@media(max-width:860px){.faq-grid{grid-template-columns:1fr}.faq-grid .hilly-wrap{position:static;min-height:380px}}
+
+/* ===== "What we teach": generated 3D floating letters ===== */
+.letter-field{position:absolute;inset:0;perspective:900px;transform-style:preserve-3d;overflow:hidden}
+.lt{position:absolute;font-family:var(--f-head);font-weight:700;line-height:1;user-select:none;will-change:transform;
+  transform-style:preserve-3d;opacity:var(--o,.14);
+  color:var(--c);
+  text-shadow:1px 1px 0 var(--s),2px 2px 0 var(--s),3px 3px 0 var(--s),4px 4px 0 var(--s),5px 5px 0 var(--s),6px 6px 0 var(--s),10px 14px 18px rgba(20,53,40,.18);
+  animation:ltDrift var(--d) ease-in-out var(--delay) infinite alternate,ltSpin calc(var(--d)*1.7) ease-in-out var(--delay) infinite alternate;
+  transform:translate3d(0,0,var(--z)) rotate(var(--r)) scale(var(--sc))}
+@keyframes ltDrift{from{translate:0 0}to{translate:var(--x) var(--y)}}
+@keyframes ltSpin{from{transform:translate3d(0,0,var(--z)) rotate(calc(var(--r) - 8deg)) rotateY(-14deg) scale(var(--sc))}to{transform:translate3d(0,0,var(--z)) rotate(calc(var(--r) + 8deg)) rotateY(14deg) scale(calc(var(--sc)*1.22))}}
+.lt.deep{filter:blur(1.5px)}
+@media(prefers-reduced-motion:reduce){.lt{animation:none}}

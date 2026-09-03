@@ -161,3 +161,99 @@ if(slides.length>1){
   io2.observe(box);
   box.addEventListener('click',step);
 })();
+
+// ---- visit carousel caption follows the active image ----
+(function(){
+  const cap=document.querySelector('.rs-cap-text');if(!cap)return;
+  let busy=false;
+  function upd(){
+    if(busy)return;
+    const on=document.querySelector('.rs-img.on');if(!on)return;
+    const t=document.documentElement.lang==='en'?on.dataset.capEn:on.dataset.capTh;
+    if(!t||cap.textContent===t)return;
+    busy=true;cap.classList.add('fade');
+    setTimeout(()=>{cap.textContent=t;cap.classList.remove('fade');busy=false},400);
+  }
+  const mo=new MutationObserver(upd);
+  document.querySelectorAll('.rs-img').forEach(img=>mo.observe(img,{attributes:true,attributeFilter:['class']}));
+  document.getElementById('langToggle')?.addEventListener('click',()=>setTimeout(upd,50));upd();
+})();
+
+// ---- Hilly the sheep: reusable talking mascot ----
+(function(){
+  const SVG=`<svg class="hilly" viewBox="0 0 360 300" aria-label="Hilly the sheep">
+  <g class="legs" fill="#2b2b2b"><rect x="150" y="206" width="20" height="70" rx="9"/><rect x="186" y="212" width="18" height="66" rx="9"/><rect x="262" y="212" width="18" height="66" rx="9"/><rect x="296" y="204" width="20" height="70" rx="9"/><rect x="146" y="266" width="28" height="16" rx="7"/><rect x="182" y="270" width="26" height="14" rx="7"/><rect x="258" y="270" width="26" height="14" rx="7"/><rect x="292" y="264" width="28" height="16" rx="7"/></g>
+  <g class="wool" fill="#fff" stroke="#e3e3e3" stroke-width="2"><circle cx="333" cy="158" r="30"/><circle cx="324" cy="188" r="26"/><circle cx="298" cy="213" r="30"/><circle cx="260" cy="230" r="26"/><circle cx="215" cy="236" r="30"/><circle cx="170" cy="230" r="26"/><circle cx="132" cy="213" r="30"/><circle cx="106" cy="188" r="26"/><circle cx="97" cy="158" r="30"/><circle cx="106" cy="128" r="26"/><circle cx="132" cy="103" r="30"/><circle cx="170" cy="86" r="26"/><circle cx="215" cy="80" r="30"/><circle cx="260" cy="86" r="26"/><circle cx="298" cy="103" r="30"/><circle cx="324" cy="128" r="26"/><ellipse cx="215" cy="158" rx="118" ry="78" stroke="none"/><circle class="tail" cx="336" cy="150" r="16"/></g>
+  <g class="head">
+    <path class="ear-l" d="M70 118c-26-10-48-4-52 10-3 10 10 16 26 12 14-4 24-12 26-22z" fill="#b39a74"/><path d="M62 122c-14-4-28-2-30 6 6 4 18 2 30-6z" fill="#f2a6a0" opacity=".7"/>
+    <path class="ear-r" d="M148 112c26-12 48-6 52 8 3 10-10 16-26 12-14-4-24-12-26-20z" fill="#b39a74"/>
+    <ellipse cx="108" cy="140" rx="46" ry="50" fill="#b39a74"/>
+    <g fill="#fff" stroke="#e3e3e3" stroke-width="2"><circle cx="82" cy="98" r="20"/><circle cx="108" cy="88" r="24"/><circle cx="134" cy="98" r="20"/><circle cx="108" cy="104" r="22" stroke="none"/></g>
+    <g class="eyes"><circle cx="90" cy="136" r="11" fill="#fff"/><circle cx="128" cy="136" r="11" fill="#fff"/><circle cx="92" cy="137" r="5.5" fill="#1f2a25"/><circle cx="130" cy="137" r="5.5" fill="#1f2a25"/><circle cx="94" cy="135" r="1.8" fill="#fff"/><circle cx="132" cy="135" r="1.8" fill="#fff"/>
+      <rect class="eye-lid" x="78" y="125" width="24" height="22" rx="11" fill="#b39a74"/><rect class="eye-lid" x="116" y="125" width="24" height="22" rx="11" fill="#b39a74"/></g>
+    <g class="glasses" fill="none" stroke="#1f2a25" stroke-width="4"><circle cx="90" cy="136" r="15"/><circle cx="128" cy="136" r="15"/><path d="M105 136h8M75 132l-12-5M143 132l12-5"/></g>
+    <path class="glasses-shine" d="M81 129l8-8M119 129l8-8" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity="0"/>
+    <ellipse cx="108" cy="164" rx="10" ry="7" fill="#e2724a"/>
+    <path class="mouth-closed" d="M98 176q10 8 20 0" fill="none" stroke="#1f2a25" stroke-width="3" stroke-linecap="round"/>
+    <ellipse class="mouth-open" cx="108" cy="178" rx="9" ry="7" fill="#1f2a25"/>
+    <circle cx="74" cy="158" r="6" fill="#f2a6a0" opacity=".6"/><circle cx="142" cy="158" r="6" fill="#f2a6a0" opacity=".6"/>
+  </g>
+</svg>`;
+  const SCRIPTS={
+    thailand:[
+      ['TH','สวัสดีครับ! 👋'],['TH','ผมชื่อ ฮิลลี่ เป็นแกะประจำโรงเรียนฮิลล์ท็อปครับ'],['TH','ขอลองพูดภาษาอังกฤษให้ฟังนะครับ…'],
+      ['EN','Hi! I\'m Hilly, the Hilltop sheep.'],['EN','See? I just switched to English. Easy!'],['EN','I was born on this hill in Nanglae, Chiang Rai.'],
+      ['EN','Every afternoon, kids come here to play, sing and speak English.'],['EN','No stress. No boring memorizing. Just fun.'],
+      ['EN','Our teachers come from Thailand, America and beyond.'],['EN','Classes are small, so every child gets a turn to talk.'],
+      ['EN','English opens doors: pilots, doctors, engineers, hotel managers…'],['EN','The earlier you start, the easier it gets. Trust a sheep!'],
+      ['EN','Want to see a class in action? Come visit us.'],['EN','Bye for now… '],['TH','แล้วพบกันที่ฮิลล์ท็อปนะครับ! 🐑']],
+    faq:[
+      ['TH','สวัสดีครับ ผมฮิลลี่เอง 👋'],['TH','มีคำถามใช่ไหมครับ? ผู้ปกครองส่วนใหญ่ก็มีเหมือนกัน'],
+      ['EN','Hi, Hilly here! Got questions? Most parents do.'],['EN','This list answers the ones we hear every single week.'],
+      ['EN','How old should my child be? Tap the first question.'],['EN','What if they already know some English? We test and place them, no starting over.'],
+      ['EN','What does it cost? Which days? Is it hard? It\'s all right here.'],['EN','Still wondering about something? Call Teacher Mind or send us a LINE message.'],
+      ['EN','Or better: come and watch a class. Seeing is believing.'],['TH','อ่านคำตอบด้านข้างได้เลยครับ แล้วมาเจอกันนะ! 🐑']]
+  };
+  document.querySelectorAll('[data-hilly]').forEach(wrap=>{
+    const script=SCRIPTS[wrap.dataset.hilly]||SCRIPTS.thailand;
+    wrap.innerHTML='<div class="bubble"><span class="lang">TH</span><span class="htxt"></span><span class="cursor"></span></div><div class="ground"></div>'+SVG+'<div class="hilly-name" data-th="ฮิลลี่ · แกะน้อยแห่งฮิลล์ท็อป" data-en="Hilly · the Hilltop sheep">ฮิลลี่ · แกะน้อยแห่งฮิลล์ท็อป</div>';
+    if(document.documentElement.lang==='en')wrap.querySelector('.hilly-name').textContent='Hilly · the Hilltop sheep';
+    const el=wrap.querySelector('.hilly'),bub=wrap.querySelector('.bubble'),txt=wrap.querySelector('.htxt'),lang=wrap.querySelector('.lang');
+    let i=0,running=false,timer;
+    function type(str,done){let k=0;txt.textContent='';el.classList.add('talking');
+      (function step(){if(k<=str.length){txt.textContent=str.slice(0,k++);timer=setTimeout(step,str.charCodeAt(0)>3000?55:38)}else{el.classList.remove('talking');done()}})()}
+    function next(){
+      if(document.hidden){timer=setTimeout(next,1500);return}
+      const [l,s]=script[i];lang.textContent=l;bub.classList.add('show');
+      type(s,()=>{timer=setTimeout(()=>{i=(i+1)%script.length;if(i===0){bub.classList.remove('show');timer=setTimeout(next,2500)}else next()},Math.max(1800,s.length*70))});
+    }
+    new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting&&!running){running=true;setTimeout(next,600)}}),{threshold:.3}).observe(el);
+    el.addEventListener('click',()=>{clearTimeout(timer);el.classList.remove('talking');i=(i+1)%script.length;next()});
+  });
+})();
+
+// ---- "What we teach": fresh set of floating letters every visit ----
+(function(){
+  const f=document.getElementById('letterField');if(!f)return;
+  const pool='AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz'.split('').concat(['?','!','★','✎','♪','✿','+','&']);
+  const pal=[['#1e4d3b','#143528'],['#e2724a','#b85634'],['#f4a83d','#c9862a'],['#3f7d5c','#2c5a42'],['#ff5ea8','#c9407f'],['#4a90d9','#2f6fb0']];
+  const small=innerWidth<640,n=small?14:26,used=[];
+  for(let i=0;i<n;i++){
+    const el=document.createElement('span');el.className='lt';
+    el.textContent=pool[Math.floor(Math.random()*pool.length)];
+    const depth=Math.random();               // 0 far … 1 near
+    const size=(small?2.2:3)+depth*(small?3:6);
+    const [c,sh]=pal[Math.floor(Math.random()*pal.length)];
+    let x,y,tries=0;do{x=Math.random()*94;y=Math.random()*92;tries++}while(tries<20&&used.some(u=>Math.abs(u[0]-x)<9&&Math.abs(u[1]-y)<12));
+    used.push([x,y]);
+    el.style.cssText=`left:${x}%;top:${y}%;font-size:${size.toFixed(2)}rem;--c:${c};--s:${sh};--o:${(0.07+depth*0.11).toFixed(2)};--z:${Math.round(-260+depth*320)}px;--r:${Math.round(-28+Math.random()*56)}deg;--sc:${(0.85+Math.random()*0.35).toFixed(2)};--x:${Math.round(-40+Math.random()*80)}px;--y:${Math.round(-70+Math.random()*40)}px;--d:${(11+Math.random()*12).toFixed(1)}s;--delay:-${(Math.random()*12).toFixed(1)}s`;
+    if(depth<0.3)el.classList.add('deep');
+    f.appendChild(el);
+  }
+  // gentle parallax on pointer move (desktop only)
+  if(!small&&matchMedia('(pointer:fine)').matches){
+    const sec=f.closest('section');
+    sec.addEventListener('pointermove',e=>{const r=sec.getBoundingClientRect(),dx=(e.clientX-r.left)/r.width-.5,dy=(e.clientY-r.top)/r.height-.5;f.style.transform=`rotateY(${dx*6}deg) rotateX(${-dy*6}deg)`},{passive:true});
+    sec.addEventListener('pointerleave',()=>{f.style.transform=''});
+  }
+})();
