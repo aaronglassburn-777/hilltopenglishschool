@@ -494,3 +494,11 @@ document.querySelectorAll('.kb-band').forEach(b=>{
   addEventListener('resize',layout);addEventListener('load',()=>{layout();update()});addEventListener('scroll',update,{passive:true});layout();setTimeout(()=>{layout();update()},700);
   document.getElementById('langToggle')?.addEventListener('click',()=>{grid.querySelectorAll('.staff-role').forEach(r=>{typers.set(r,(typers.get(r)||0)+1);delete r.dataset.typed;r.classList.remove('done')});setTimeout(update,120)});
 })();
+
+// ---- Home: four skills — feature one card at a time (skips while the visitor is hovering) ----
+(function(){const sec=document.getElementById('programs');if(!sec)return;const cards=[...sec.querySelectorAll('.card-photo')];if(!cards.length)return;let k=-1,hover=false;
+  cards.forEach(c=>{c.addEventListener('mouseenter',()=>{hover=true;cards.forEach(x=>x.classList.remove('lit'))});c.addEventListener('mouseleave',()=>{hover=false})});
+  function step(){if(document.hidden||hover)return;if(k>=0)cards[k].classList.remove('lit');k=(k+1)%cards.length;cards[k].classList.add('lit')}
+  function chk(){if(sec.dataset.live)return;const r=sec.getBoundingClientRect();if(r.top<innerHeight*.6&&r.bottom>0){sec.dataset.live=1;setTimeout(()=>{step();setInterval(step,4200)},900)}}
+  addEventListener('scroll',chk,{passive:true});setTimeout(chk,800);
+})();

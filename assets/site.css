@@ -942,3 +942,13 @@ html,body{max-width:100%;overflow-x:clip}
 @keyframes nodePulse2{0%,100%{scale:1;box-shadow:0 0 0 0 rgba(244,168,61,.5)}50%{scale:1.25;box-shadow:0 0 0 8px rgba(244,168,61,0)}}
 .staff-grid{gap:48px}
 @media(max-width:860px){.thread-node{display:none}}
+/* ===== Home: four skills — one card featured at a time ===== */
+.programs .card-photo{transition:transform .8s cubic-bezier(.34,1.3,.5,1),box-shadow .6s}
+.programs .card-photo::after{content:"";position:absolute;inset:-2px;border-radius:calc(var(--radius) + 2px);padding:2px;pointer-events:none;opacity:0;transition:opacity .6s;
+  background:conic-gradient(from var(--ring),var(--sun),var(--clay),var(--leaf),var(--sun));
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);mask-composite:exclude}
+.programs .card-photo.lit{transform:translateY(-10px);box-shadow:0 22px 50px rgba(20,53,40,.16)}
+.programs .card-photo.lit::after{opacity:1;animation:ringSpin 3s linear infinite}
+.programs .card-photo.lit .card-img img{transform:scale(1.14)}
+.programs .card-photo.lit .icon{transform:rotate(-8deg) scale(1.1)}
+.programs .card-photo.lit .card-body::before{width:56px}
