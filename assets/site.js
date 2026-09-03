@@ -302,73 +302,24 @@ document.querySelectorAll('[data-slider]').forEach(sl=>{
   b.addEventListener('click',open);lb.querySelector('.lb-close').addEventListener('click',close);lb.addEventListener('click',e=>{if(e.target===lb)close()});addEventListener('keydown',e=>{if(e.key==='Escape'&&!lb.hidden)close()});
 })();
 
-// ---- Parents page: read aloud with the browser voice ----
+// ---- Parents page: recorded voice (Gemini TTS files), browser voice as fallback ----
 (function(){
-  if(!('speechSynthesis' in window))return;
-  const synth=speechSynthesis;let active=null;
-  function speak(text,btn){
-    if(active===btn){synth.cancel();return}
-    synth.cancel();document.querySelectorAll('.note-listen.on').forEach(b=>b.classList.remove('on'));
-    const lang=document.documentElement.lang==='en'?'en-US':'th-TH';
-    const u=new SpeechSynthesisUtterance(text);u.lang=lang;u.rate=lang==='th-TH'?1:0.95;
-    const v=synth.getVoices().find(v=>v.lang.replace('_','-').toLowerCase().startsWith(lang.slice(0,2)));if(v)u.voice=v;
-    active=btn;btn&&btn.classList.add('on');
-    u.onend=u.onerror=()=>{active=null;btn&&btn.classList.remove('on')};
-    synth.speak(u);
+  if(!document.querySelector('.parents-hero'))return;
+  let audio=null,activeBtn=null;
+  function stop(){if(audio){audio.pause();audio=null}if('speechSynthesis' in window)speechSynthesis.cancel();document.querySelectorAll('.listening').forEach(b=>b.classList.remove('listening','on'));activeBtn=null}
+  function fallback(text,btn){if(!('speechSynthesis' in window))return;const lang=document.documentElement.lang==='en'?'en-US':'th-TH';const u=new SpeechSynthesisUtterance(text);u.lang=lang;u.onend=u.onerror=stop;speechSynthesis.speak(u)}
+  function play(key,btn,text){
+    if(activeBtn===btn){stop();return}
+    stop();activeBtn=btn;btn.classList.add('listening','on');
+    const lang=document.documentElement.lang==='en'?'en':'th';
+    audio=new Audio(`assets/audio/parents-${key}-${lang}.mp3`);
+    audio.onended=stop;audio.onerror=()=>{audio=null;fallback(text,btn)};
+    audio.play().catch(()=>fallback(text,btn));
   }
   const txt=el=>el.textContent.replace(/\s+/g,' ').trim();
-  document.querySelectorAll('.note-listen').forEach(b=>b.addEventListener('click',()=>{const a=b.closest('.note');speak(txt(a.querySelector('h3'))+'. '+txt(a.querySelector('p')),b)}));
-  const tips=document.getElementById('listenTips');if(tips)tips.addEventListener('click',()=>{speak([...document.querySelectorAll('.practices .road-card:not(.card-cta)')].map(c=>txt(c.querySelector('b'))+'. '+txt(c.querySelector('p'))).join(' '),tips)});
-  const hero=document.getElementById('listenHero');if(hero)hero.addEventListener('click',()=>{const h=document.querySelector('.parents-hero');speak(txt(h.querySelector('h1'))+'. '+txt(h.querySelector('p')),hero)});
-  addEventListener('beforeunload',()=>synth.cancel());
-})();
-
-// ---- Age 12+: Ken Burns band + rotating words ----
-(function(){const b=document.querySelector('.kb-band');if(!b)return;const sl=b.querySelectorAll('.kb-slide'),w=b.querySelectorAll('.kb-word');let i=0;w[0]&&w[0].classList.add('on');
-  setInterval(()=>{if(document.hidden)return;sl[i].classList.remove('on');w[i]&&w[i].classList.remove('on');i=(i+1)%sl.length;sl[i].classList.add('on');w[i]&&w[i].classList.add('on')},7000)})();
-
-// ---- typed headings: type when scrolled into view, retype on language change ----
-(function(){const hs=document.querySelectorAll('[data-typed]');if(!hs.length)return;
-  function type(h){const full=h.dataset[document.documentElement.lang==='en'?'en':'th']||h.textContent;let k=0;clearTimeout(h._t);h.innerHTML='<span class="tcur"></span>';
-    (function step(){h.innerHTML=full.slice(0,k)+'<span class="tcur"></span>';if(k++<full.length)h._t=setTimeout(step,full.charCodeAt(0)>3000?70:48);else setTimeout(()=>{h.innerHTML=full},1800)})()}
-  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting&&!e.target.dataset.done){e.target.dataset.done=1;type(e.target)}}),{threshold:.6});
-  hs.forEach(h=>{h.textContent='';io.observe(h)});
-  function chk(){hs.forEach(h=>{if(h.dataset.done)return;const r=h.getBoundingClientRect();if(r.top<innerHeight*.85&&r.bottom>0){h.dataset.done=1;type(h)}})}
-  addEventListener('scroll',chk,{passive:true});setTimeout(chk,800);
-  document.getElementById('langToggle')?.addEventListener('click',()=>setTimeout(()=>hs.forEach(h=>{if(h.dataset.done)type(h)}),60));
-})();
-
-// ---- Contact: sliding + typing mottos ----
-(function(){const el=document.getElementById('mottoLine');if(!el)return;
-  const M=[
-    ['ขยันเรียน ขยันทำ แล้ว<em>ไปให้ถึงเป้าหมาย</em>','Work hard, study hard, and <em>reach your goals.</em>'],
-    ['เราดูแลให้ทุกครอบครัวมีแรงสนับสนุนที่ต้องการ <em>เพื่อไปให้ไกลกว่าเดิม</em>','We make sure every family has the support they need <em>to go further in life.</em>'],
-    ['ทุกคำที่ลูกกล้าพูด <em>คือประตูอีกบานที่เปิดออก</em>','Every word your child dares to say <em>is another door opening.</em>'],
-    ['เรียนแบบไม่เครียด <em>แต่ผลลัพธ์จริงจัง</em>','Stress-free learning. <em>Serious results.</em>'],
-    ['เด็กที่มีความสุขในวันนี้ <em>คือผู้ใหญ่ที่มั่นใจในวันหน้า</em>','A happy child today <em>is a confident adult tomorrow.</em>'],
-    ['ห้องเรียนเล็ก <em>ความฝันใหญ่</em>','Small classes. <em>Big dreams.</em>'],
-    ['พ่อแม่คือครูคนแรก <em>เราภูมิใจที่ได้เป็นครูคนที่สอง</em>','Parents are the first teachers. <em>We are honored to be the second.</em>'],
-    ['ภาษาอังกฤษไม่ใช่วิชา <em>แต่คือกุญแจ</em>','English is not a subject. <em>It is a key.</em>'],
-    ['ทุกคนได้รับความรักและเกียรติ <em>ทุกวัน</em>','Every child treated with love and honor, <em>every day.</em>'],
-    ['เริ่มวันนี้ <em>แล้วดูลูกเติบโตวันละนิด</em>','Start today, <em>and watch them grow a little every day.</em>'],
-    ['จากนางแล เชียงราย <em>สู่โลกทั้งใบ</em>','From Nanglae, Chiang Rai, <em>to the whole world.</em>'],
-    ['ความพยายามวันนี้ <em>คือโอกาสของวันหน้า</em>','Today\'s effort <em>is tomorrow\'s opportunity.</em>']
-  ];
-  const dirs=['translate(0,-70px)','translate(0,70px)','translate(-90px,0)','translate(90px,0)','translate(-70px,-50px) rotate(-4deg)','translate(70px,50px) rotate(4deg)','scale(.6)','rotateX(70deg)'];
-  let i=Math.floor(Math.random()*M.length),t;
-  function show(){
-    if(document.hidden){t=setTimeout(show,1500);return}
-    const lang=document.documentElement.lang==='en'?1:0,html=M[i][lang];
-    el.classList.remove('in');el.classList.add('out');
-    setTimeout(()=>{
-      el.classList.remove('out');el.style.transform=dirs[Math.floor(Math.random()*dirs.length)];el.innerHTML='<span class="tcur"></span>';
-      void el.offsetWidth;el.classList.add('in');
-      // type the plain text, then swap in the highlighted version
-      const plain=html.replace(/<\/?em>/g,'');let k=0;
-      (function step(){if(k<=plain.length){el.innerHTML=plain.slice(0,k++)+'<span class="tcur"></span>';t=setTimeout(step,plain.charCodeAt(0)>3000?45:34)}
-        else{el.innerHTML=html;i=(i+1)%M.length;t=setTimeout(show,3200)}})();
-    },520);
-  }
-  new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting&&!el.dataset.live){el.dataset.live=1;show()}}),{threshold:.3}).observe(el.closest('.motto'));
-  document.getElementById('langToggle')?.addEventListener('click',()=>{if(el.dataset.live){clearTimeout(t);show()}});
+  document.querySelectorAll('.note-listen').forEach((b,i)=>b.addEventListener('click',()=>{const a=b.closest('.note');play('note-'+(i+1),b,txt(a.querySelector('h3'))+'. '+txt(a.querySelector('p')))}));
+  const tips=document.getElementById('listenTips');if(tips)tips.addEventListener('click',()=>play('tips',tips,[...document.querySelectorAll('.practices .road-card:not(.card-cta)')].map(c=>txt(c.querySelector('b'))+'. '+txt(c.querySelector('p'))).join(' ')));
+  const hero=document.getElementById('listenHero');if(hero)hero.addEventListener('click',()=>{const h=document.querySelector('.parents-hero');play('hero',hero,txt(h.querySelector('h1'))+'. '+txt(h.querySelector('p')))});
+  document.getElementById('langToggle')?.addEventListener('click',stop);
+  addEventListener('pagehide',stop);
 })();
