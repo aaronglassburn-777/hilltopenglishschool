@@ -580,3 +580,11 @@ html,body{max-width:100%;overflow-x:clip}
 .flow-steps span{font-size:.86rem;color:var(--ink-soft);line-height:1.5}
 @media(max-width:960px){.flow{grid-template-columns:1fr}.flow-steps{grid-template-columns:repeat(2,1fr)}.flow-steps li::after{display:none}}
 @media(max-width:520px){.flow-steps{grid-template-columns:1fr}.flow{padding:28px 22px}}
+
+/* ===== Simple random image slider ===== */
+.slider{position:relative}
+.slider img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.1s ease}
+.slider img.on{opacity:1;position:relative}
+.slider-dots{position:absolute;right:16px;bottom:14px;display:flex;gap:7px;z-index:2}
+.slider-dots button{width:9px;height:9px;border-radius:50%;border:0;padding:0;background:rgba(255,255,255,.55);cursor:pointer;transition:.3s}
+.slider-dots button.on{background:#fff;transform:scale(1.35)}

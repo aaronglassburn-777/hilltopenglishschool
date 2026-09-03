@@ -260,3 +260,13 @@ if(slides.length>1){
 
 // ---- classes: rotate the highlighted fact pill ----
 (function(){const ps=document.querySelectorAll('.cine-pills .pill');if(!ps.length)return;let i=0;setInterval(()=>{if(document.hidden)return;ps[i].classList.remove('on');i=(i+1)%ps.length;ps[i].classList.add('on')},3200)})();
+
+// ---- simple random slider (data-slider) ----
+document.querySelectorAll('[data-slider]').forEach(sl=>{
+  const imgs=[...sl.querySelectorAll('img')],dots=sl.querySelector('.slider-dots');let cur=0;
+  imgs.forEach((_,i)=>{const b=document.createElement('button');b.setAttribute('aria-label','Photo '+(i+1));if(!i)b.classList.add('on');b.addEventListener('click',()=>{show(i);restart()});dots.appendChild(b)});
+  const bs=dots.querySelectorAll('button');
+  function show(i){imgs[cur].classList.remove('on');bs[cur].classList.remove('on');cur=i;imgs[cur].classList.add('on');bs[cur].classList.add('on')}
+  let t;function tick(){if(document.hidden)return;let n;do{n=Math.floor(Math.random()*imgs.length)}while(n===cur&&imgs.length>1);show(n)}
+  function restart(){clearInterval(t);t=setInterval(tick,7000)}restart();
+});
