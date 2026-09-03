@@ -441,3 +441,29 @@ document.querySelectorAll('.kb-band').forEach(b=>{
     setTimeout(()=>{hw.className='hilly-wrap hilly-visit hilly-band stand';hw._hilly.say(()=>{hw.className='hilly-wrap hilly-visit hilly-band walk-out';setTimeout(()=>{hw.className='hilly-wrap hilly-visit hilly-band';busy=false},1600)})},1800)}
   new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting&&!hw.dataset.live){hw.dataset.live=1;setTimeout(runHilly,3000);setInterval(runHilly,16000)}}),{threshold:.3}).observe(hw.closest('.kb-band'));
 })();
+
+// ---- rotating-word headings: type, then erase & retype the bracketed word ----
+(function(){const hs=document.querySelectorAll('[data-rotate]');if(!hs.length)return;
+  hs.forEach(h=>{let run=0,timer;
+    function parse(){const l=document.documentElement.lang==='en'?'en':'th';const m=h.dataset[l].match(/^(.*)\{(.*)\}(.*)$/);return {pre:m[1],words:m[2].split('|'),post:m[3]}}
+    function render(pre,word,post,cur){h.innerHTML=pre+'<span class="rw">'+word+'</span>'+(cur?'<span class="tcur"></span>':'')+post}
+    function start(){const id=++run;clearTimeout(timer);const {pre,words,post}=parse();const thai=pre.charCodeAt(0)>3000;const sp=thai?55:42;let wi=0;
+      // type whole line first
+      const full=pre+words[0]+post;let k=0;
+      (function t(){if(id!==run)return;if(k<=full.length){h.innerHTML=full.slice(0,k)+'<span class="tcur"></span>';k++;timer=setTimeout(t,sp)}else{render(pre,words[0],post,false);timer=setTimeout(swap,5200)}})();
+      function swap(){if(id!==run)return;const cur=words[wi],nxt=words[(wi+1)%words.length];let n=cur.length;
+        (function erase(){if(id!==run)return;if(n>0){n--;render(pre,cur.slice(0,n),post,true);timer=setTimeout(erase,thai?45:36)}else{let m=0;(function ty(){if(id!==run)return;if(m<=nxt.length){render(pre,nxt.slice(0,m),post,true);m++;timer=setTimeout(ty,sp)}else{render(pre,nxt,post,false);wi=(wi+1)%words.length;timer=setTimeout(swap,5200)}})()}})()}
+    }
+    function chk(){if(h.dataset.live)return;const r=h.getBoundingClientRect();if(r.top<innerHeight*.85&&r.bottom>0){h.dataset.live=1;start()}}
+    h.textContent='';addEventListener('scroll',chk,{passive:true});setTimeout(chk,800);
+    document.getElementById('langToggle')?.addEventListener('click',()=>setTimeout(()=>{if(h.dataset.live)start()},60));
+  });
+})();
+
+// ---- home reviews: stars twinkle in sequence, gentle roaming highlight ----
+(function(){const q=document.querySelector('.quotes');if(!q)return;const cards=[...q.querySelectorAll('.review,.quote')];if(!cards.length)return;let k=-1;
+  function go(){cards.forEach((c,i)=>setTimeout(()=>{const s=c.querySelector('.stars');if(s){s.classList.add('twinkle');setTimeout(()=>s.classList.remove('twinkle'),1300)}},i*350));
+    setInterval(()=>{if(document.hidden)return;if(k>=0)cards[k].classList.remove('lit');k=(k+1)%cards.length;cards[k].classList.add('lit');const s=cards[k].querySelector('.stars');if(s){s.classList.add('twinkle');setTimeout(()=>s.classList.remove('twinkle'),1300)}},4200)}
+  function chk(){if(q.dataset.live)return;const r=q.getBoundingClientRect();if(r.top<innerHeight*.7){q.dataset.live=1;setTimeout(go,900)}}
+  addEventListener('scroll',chk,{passive:true});setTimeout(chk,800);
+})();
