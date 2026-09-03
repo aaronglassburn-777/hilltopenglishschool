@@ -627,3 +627,53 @@ html,body{max-width:100%;overflow-x:clip}
 
 .stats + .cine,.cine + .story{padding-top:96px}
 .stats{padding-bottom:0}
+
+/* ===== Nav dropdown ===== */
+.has-drop{position:relative}
+.nav-drop{position:absolute;top:100%;left:-14px;min-width:190px;background:#fff;border-radius:14px;box-shadow:0 18px 44px rgba(20,53,40,.18);padding:8px;list-style:none;opacity:0;visibility:hidden;translate:0 8px;transition:.25s;z-index:60}
+.has-drop:hover .nav-drop,.has-drop:focus-within .nav-drop{opacity:1;visibility:visible;translate:0 0}
+.nav-drop li a{display:block;padding:10px 14px;border-radius:10px;color:var(--ink)!important;font-size:.9rem}
+.nav-drop li a:hover{background:var(--cream);color:var(--forest)!important}
+.nav-drop li a.active{color:var(--clay)!important;font-weight:700}
+@media(max-width:1280px){.nav-drop{display:none}}
+
+/* ===== Parents page ===== */
+.parents-hero{position:relative;overflow:hidden}
+.parents-hero .thai-bg img{opacity:.28}
+.parents-hero .wrap{position:relative;z-index:2;max-width:1160px}
+.parents-hero h1{max-width:44rem}
+.parents-hero p{max-width:40rem}
+.not-alone{background:var(--paper)}
+.vic{list-style:none;padding:0;margin:22px 0 0;display:grid;gap:10px}
+.vic li{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;background:var(--cream);border-radius:14px;padding:12px 16px}
+.vic b{font-family:var(--f-head);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--clay);padding-top:3px}
+.vic span{color:var(--ink);font-size:.95rem}
+.parents-hilly .thai-inner{max-width:none}
+.parents-hilly em{font-style:normal;color:var(--sun)}
+.practices{grid-template-columns:repeat(4,1fr)}
+.card-cta{background:linear-gradient(160deg,var(--forest),var(--forest-deep));color:#fff}
+.card-cta b,.card-cta p{color:#fff}.card-cta p{opacity:.85;margin-bottom:14px}
+.card-cta.lit{background:linear-gradient(160deg,var(--forest),var(--forest-deep))}
+.week{background:var(--cream)}
+.week-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:12px}
+.day{background:var(--paper);border-radius:16px;padding:18px 14px;text-align:center;border:1px solid rgba(30,77,59,.06);transition:.3s}
+.day:hover{transform:translateY(-5px);box-shadow:var(--shadow)}
+.day b{display:block;font-family:var(--f-head);color:var(--clay);font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px}
+.day span{font-size:1.8rem;display:block;margin-bottom:8px}
+.day p{font-size:.84rem;color:var(--ink-soft);line-height:1.45}
+@media(max-width:1000px){.week-grid{grid-template-columns:repeat(4,1fr)}.practices{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.week-grid{grid-template-columns:repeat(2,1fr)}.practices{grid-template-columns:1fr}}
+.victories{background:var(--paper)}
+.notes{background:var(--cream)}
+.notes-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+.note{background:var(--paper);border-radius:var(--radius);padding:30px 30px 26px;border:1px solid rgba(30,77,59,.06);position:relative;transition:.35s}
+.note:hover{transform:translateY(-5px);box-shadow:var(--shadow)}
+.note-date{display:inline-block;font-family:var(--f-head);font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--clay);background:rgba(226,114,74,.1);padding:5px 12px;border-radius:999px;margin-bottom:14px}
+.note h3{font-size:1.2rem;color:var(--forest-deep);margin-bottom:10px;line-height:1.3}
+.note p{color:var(--ink-soft);font-size:.95rem;margin-bottom:16px}
+.note-listen{background:none;border:1.5px solid rgba(30,77,59,.25);color:var(--forest);border-radius:999px;padding:7px 14px;font-family:var(--f-head);font-weight:600;font-size:.82rem;cursor:pointer;transition:.25s}
+.note-listen:hover,.note-listen.on{background:var(--forest);color:#fff;border-color:var(--forest)}
+.note-listen.on{animation:capPulse 1.4s infinite}
+.notes-sub{margin-top:30px;background:var(--forest-deep);color:#fff;border-radius:var(--radius);padding:24px 30px;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+.notes-sub b{display:block;font-family:var(--f-head);font-size:1.1rem}.notes-sub span{opacity:.8;font-size:.92rem}
+@media(max-width:760px){.notes-grid{grid-template-columns:1fr}}

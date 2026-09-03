@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>สำหรับผู้ปกครอง — Hilltop English School</title>
+<link rel="icon" href="assets/img/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Prompt:wght@400;500;600;700&family=Sarabun:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+
+<nav id="nav">
+  <div class="nav-inner">
+    <a class="logo" href="index.html">
+      <div class="logo-mark"><img src="assets/img/logo.png" alt="Hilltop English School logo"></div>
+      <div class="logo-text"><b>Hilltop English School</b><span data-th="เชียงราย · โรงเรียนสอนภาษาอังกฤษ" data-en="Chiang Rai · English School">เชียงราย · โรงเรียนสอนภาษาอังกฤษ</span></div>
+    </a>
+    <ul class="nav-links">
+      <li class="pg"><a href="about.html" data-th="เกี่ยวกับเรา" data-en="About Us">เกี่ยวกับเรา</a></li>
+      <li class="pg has-drop"><a href="staff.html" class="active" data-th="ครูของเรา" data-en="Our Teachers">ครูของเรา</a><ul class="nav-drop"><li><a href="staff.html" data-th="ครูของเรา" data-en="Our Teachers">ครูของเรา</a></li><li><a href="parents.html" class="active" data-th="สำหรับผู้ปกครอง" data-en="Parents">สำหรับผู้ปกครอง</a></li></ul></li>
+      <li class="pg"><a href="classes.html" data-th="คลาสเรียน" data-en="Classes">คลาสเรียน</a></li>
+      <li class="pg"><a href="age12.html" data-th="อายุ 12+" data-en="Age 12+">อายุ 12+</a></li>
+      <li class="pg"><a href="reviews.html" data-th="รีวิว" data-en="Reviews">รีวิว</a></li>
+      <li class="pg"><a href="contact.html" data-th="ติดต่อเรา" data-en="Contact">ติดต่อเรา</a></li>
+      <li><a class="nav-cta" href="register.html" data-th="สมัครเรียน" data-en="Enroll Now">สมัครเรียน</a></li>
+      <li><div class="lang-toggle" id="langToggle"><span data-lang="th" class="on">ไทย</span><span data-lang="en">EN</span></div></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="page-hero parents-hero">
+  <div class="thai-bg"><img src="assets/img/parents-1.jpg" alt=""></div>
+  <div class="wrap">
+    <p class="crumb"><a href="index.html" data-th="หน้าแรก" data-en="Home">หน้าแรก</a> / <span data-th="สำหรับผู้ปกครอง" data-en="Parents">สำหรับผู้ปกครอง</span></p>
+    <span class="eyebrow" data-th="สำหรับผู้ปกครอง" data-en="For Parents">สำหรับผู้ปกครอง</span>
+    <h1 data-th="คุณคือครูคนสำคัญที่สุดของลูก<br>และคุณไม่ได้เดินทางนี้คนเดียว" data-en="You are your child&rsquo;s most important teacher.<br>And you are not doing this alone.">คุณคือครูคนสำคัญที่สุดของลูก<br>และคุณไม่ได้เดินทางนี้คนเดียว</h1>
+    <p data-th="สิ่งที่ลูกเรียนที่ฮิลล์ท็อป 50 นาทีต่อวัน จะงอกงามได้ในอีก 23 ชั่วโมงที่เหลือ ที่บ้าน กับคุณ หน้านี้คือคู่มือ กำลังใจ และเพื่อนร่วมทางสำหรับครอบครัวของเรา"
+       data-en="What your child learns at Hilltop for fifty minutes a day takes root in the other twenty-three hours — at home, with you. This page is our guide, our encouragement, and our way of saying: we care about you, too.">สิ่งที่ลูกเรียนที่ฮิลล์ท็อป 50 นาทีต่อวัน จะงอกงามได้ในอีก 23 ชั่วโมงที่เหลือ ที่บ้าน กับคุณ หน้านี้คือคู่มือ กำลังใจ และเพื่อนร่วมทางสำหรับครอบครัวของเรา</p>
+    <div class="hero-actions" style="margin-top:26px">
+      <a class="btn btn-primary" href="#notes" data-th="อ่าน Parent Notes" data-en="Read Parent Notes">อ่าน Parent Notes</a>
+      <button class="btn btn-ghost" type="button" id="listenHero" data-th="🔊 ฟังหน้านี้" data-en="🔊 Listen to this page">🔊 ฟังหน้านี้</button>
+    </div>
+  </div>
+</header>
+
+<!-- Not alone -->
+<section class="not-alone">
+  <div class="wrap split">
+    <div class="rv">
+      <span class="eyebrow" data-th="เราเข้าใจ" data-en="We understand">เราเข้าใจ</span>
+      <h2 data-th="การเลี้ยงลูกให้เก่งสองภาษา มีทั้งวันที่ยาก และวันที่ภูมิใจ" data-en="Raising a bilingual child has hard days — and proud ones">การเลี้ยงลูกให้เก่งสองภาษา มีทั้งวันที่ยาก และวันที่ภูมิใจ</h2>
+      <p data-th="บางเย็นลูกไม่อยากพูดภาษาอังกฤษเลย บางครั้งคุณเองก็ไม่แน่ใจว่าจะช่วยอย่างไร บางวันงานเหนื่อยจนไม่มีแรงจะนั่งอ่านหนังสือด้วยกัน ทั้งหมดนี้ปกติมาก และไม่ได้แปลว่าคุณล้มเหลว"
+         data-en="Some evenings your child refuses to say a single English word. Some days you are not sure how to help. Some nights work leaves no energy for a bedtime story. All of this is normal — and none of it means you are failing.">บางเย็นลูกไม่อยากพูดภาษาอังกฤษเลย บางครั้งคุณเองก็ไม่แน่ใจว่าจะช่วยอย่างไร บางวันงานเหนื่อยจนไม่มีแรงจะนั่งอ่านหนังสือด้วยกัน ทั้งหมดนี้ปกติมาก และไม่ได้แปลว่าคุณล้มเหลว</p>
+      <p data-th="แล้วก็มีวันที่ลูกทักครูต่างชาติที่ตลาดได้เอง วันที่อ่านป้ายภาษาอังกฤษให้คุณฟัง วันที่กล้าตอบคำถามหน้าห้อง ชัยชนะเล็ก ๆ เหล่านี้คือผลของสิ่งที่คุณทำที่บ้าน"
+         data-en="And then there is the day your child greets a foreign teacher at the market on their own. The day they read an English sign to you. The day they answer a question in front of the class. Those small victories grow from what you do at home.">แล้วก็มีวันที่ลูกทักครูต่างชาติที่ตลาดได้เอง วันที่อ่านป้ายภาษาอังกฤษให้คุณฟัง วันที่กล้าตอบคำถามหน้าห้อง ชัยชนะเล็ก ๆ เหล่านี้คือผลของสิ่งที่คุณทำที่บ้าน</p>
+      <ul class="vic">
+        <li><b data-th="ความจริง" data-en="Truth">ความจริง</b><span data-th="เด็กสองภาษาสลับภาษาไปมาเป็นเรื่องปกติ ไม่ใช่ความสับสน" data-en="Mixing Thai and English in one sentence is normal for bilingual children — it is a skill, not confusion.">เด็กสองภาษาสลับภาษาไปมาเป็นเรื่องปกติ ไม่ใช่ความสับสน</span></li>
+        <li><b data-th="ความจริง" data-en="Truth">ความจริง</b><span data-th="คุณไม่จำเป็นต้องพูดภาษาอังกฤษเก่ง เพื่อจะช่วยลูกให้เก่งภาษาอังกฤษ" data-en="You do not need to speak good English to raise a child who does.">คุณไม่จำเป็นต้องพูดภาษาอังกฤษเก่ง เพื่อจะช่วยลูกให้เก่งภาษาอังกฤษ</span></li>
+        <li><b data-th="ความจริง" data-en="Truth">ความจริง</b><span data-th="10 นาทีทุกวัน ชนะ 2 ชั่วโมงสัปดาห์ละครั้ง" data-en="Ten minutes every day beats two hours once a week.">10 นาทีทุกวัน ชนะ 2 ชั่วโมงสัปดาห์ละครั้ง</span></li>
+      </ul>
+    </div>
+    <div class="split-photo rv slider" data-slider data-shuffle>
+      <img class="on" src="assets/img/parents-4.jpg" alt="Mother and son doing homework">
+      <img src="assets/img/parents-2.jpg" alt="Father and son at breakfast">
+      <img src="assets/img/parents-3.jpg" alt="Family walking to school">
+      <div class="slider-dots"></div>
+    </div>
+  </div>
+</section>
+
+<!-- Hilly -->
+<section class="thai-hero parents-hilly">
+  <div class="thai-bg"><img src="assets/img/orig_12.jpg" alt=""></div>
+  <div class="wrap">
+    <div class="thai-inner rv">
+      <span class="eyebrow" data-th="สิ่งที่เราเชื่อ" data-en="What we believe">สิ่งที่เราเชื่อ</span>
+      <h2 data-th="การศึกษาของลูกไม่ได้เริ่มและจบที่ประตูโรงเรียน" data-en="Your child&rsquo;s education does not start and stop at the school gate">การศึกษาของลูกไม่ได้เริ่มและจบที่ประตูโรงเรียน</h2>
+      <p data-th="ที่ฮิลล์ท็อป เราสอนแบบไม่เครียด ไม่ท่องจำ ให้เด็กรักภาษาอังกฤษ และปฏิบัติต่อทุกคนด้วยความรักและเกียรติ คุณค่าเดียวกันนี้ใช้ได้ที่บ้าน และเมื่อบ้านกับโรงเรียนไปทางเดียวกัน เด็กจะเติบโตเร็วกว่าที่คิด"
+         data-en="At Hilltop we teach without stress or rote drilling, we help children love English, and we treat every child with love and honor. The same values work at home. When home and school pull in the same direction, children grow faster than anyone expects.">ที่ฮิลล์ท็อป เราสอนแบบไม่เครียด ไม่ท่องจำ ให้เด็กรักภาษาอังกฤษ และปฏิบัติต่อทุกคนด้วยความรักและเกียรติ คุณค่าเดียวกันนี้ใช้ได้ที่บ้าน และเมื่อบ้านกับโรงเรียนไปทางเดียวกัน เด็กจะเติบโตเร็วกว่าที่คิด</p>
+      <p data-th="การลงทุนในการศึกษาของลูก คือการลงทุนใน<em>ตัวคุณเอง</em>ในฐานะพ่อแม่ด้วย และเรายินดีเดินไปพร้อมกับคุณ" data-en="Investing in your child&rsquo;s education is also an investment in <em>you</em> as a parent — and we would be honored to walk that road with you.">การลงทุนในการศึกษาของลูก คือการลงทุนใน<em>ตัวคุณเอง</em>ในฐานะพ่อแม่ด้วย และเรายินดีเดินไปพร้อมกับคุณ</p>
+    </div>
+    <div class="hilly-wrap rv" data-hilly="parents"></div>
+  </div>
+</section>
+
+<!-- Practices -->
+<section class="road" id="practices">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="eyebrow" data-th="แนวทางที่ได้ผล" data-en="What works today">แนวทางที่ได้ผล</span>
+      <h2 data-th="7 แนวทางสมัยใหม่ ที่ทำได้จริงในบ้านทุกหลัง" data-en="Seven modern practices any home can use">7 แนวทางสมัยใหม่ ที่ทำได้จริงในบ้านทุกหลัง</h2>
+      <p data-th="ไม่ใช่กฎ ไม่ใช่สูตรสำเร็จ แต่เป็นสิ่งที่งานวิจัยด้านการเรียนภาษาและประสบการณ์ 10 ปีของเราบอกตรงกันว่าได้ผล เลือกทำสักข้อ แล้วค่อยเพิ่ม" data-en="Not rules, not a formula — just what language research and our ten years in the classroom agree on. Pick one, then add another.">ไม่ใช่กฎ ไม่ใช่สูตรสำเร็จ แต่เป็นสิ่งที่งานวิจัยด้านการเรียนภาษาและประสบการณ์ 10 ปีของเราบอกตรงกันว่าได้ผล เลือกทำสักข้อ แล้วค่อยเพิ่ม</p>
+    </div>
+    <div class="road-grid practices">
+      <div class="road-card rv"><div class="road-ic">🎲</div><b data-th="เล่นก่อน เรียนตาม" data-en="Play first, lessons follow">เล่นก่อน เรียนตาม</b><p data-th="เกม เพลง บทบาทสมมติ สมองเด็กจำภาษาที่มากับความสนุกได้ดีกว่าภาษาที่มากับความกลัวหลายเท่า" data-en="Games, songs, role-play. A child&rsquo;s brain keeps language that arrives with joy far better than language that arrives with fear.">เกม เพลง บทบาทสมมติ สมองเด็กจำภาษาที่มากับความสนุกได้ดีกว่าภาษาที่มากับความกลัวหลายเท่า</p></div>
+      <div class="road-card rv"><div class="road-ic">📖</div><b data-th="อ่านให้ฟังทุกคืน แม้จะภาษาไทย" data-en="Read aloud nightly — even in Thai">อ่านให้ฟังทุกคืน แม้จะภาษาไทย</b><p data-th="ทักษะการฟังเรื่องราว คำศัพท์ และสมาธิ ถ่ายโอนข้ามภาษาได้ นิทานภาษาไทยก่อนนอนก็ช่วยภาษาอังกฤษ" data-en="Story sense, vocabulary and attention transfer across languages. A Thai bedtime story still builds an English reader.">ทักษะการฟังเรื่องราว คำศัพท์ และสมาธิ ถ่ายโอนข้ามภาษาได้ นิทานภาษาไทยก่อนนอนก็ช่วยภาษาอังกฤษ</p></div>
+      <div class="road-card rv"><div class="road-ic">⏱️</div><b data-th="สั้น ๆ แต่ทุกวัน" data-en="Short, but every day">สั้น ๆ แต่ทุกวัน</b><p data-th="10 นาทีตอนอาหารเย็น: ตั้งชื่ออาหารเป็นภาษาอังกฤษ ถามว่า How was your day? ความสม่ำเสมอชนะความยาว" data-en="Ten minutes at dinner: name the food in English, ask &ldquo;How was your day?&rdquo; Consistency beats length every time.">10 นาทีตอนอาหารเย็น: ตั้งชื่ออาหารเป็นภาษาอังกฤษ ถามว่า How was your day? ความสม่ำเสมอชนะความยาว</p></div>
+      <div class="road-card rv"><div class="road-ic">🌱</div><b data-th="ชมความพยายาม ไม่ใช่ความถูกต้อง" data-en="Praise effort, not perfection">ชมความพยายาม ไม่ใช่ความถูกต้อง</b><p data-th="&ldquo;หนูลองพูดแล้ว เก่งมาก&rdquo; สร้างเด็กที่กล้าพูด การแก้ทุกคำผิดสร้างเด็กที่เงียบ" data-en="&ldquo;You tried — well done&rdquo; builds a child who dares to speak. Correcting every mistake builds a child who stays quiet.">&ldquo;หนูลองพูดแล้ว เก่งมาก&rdquo; สร้างเด็กที่กล้าพูด การแก้ทุกคำผิดสร้างเด็กที่เงียบ</p></div>
+      <div class="road-card rv"><div class="road-ic">📱</div><b data-th="หน้าจอเป็นเครื่องมือ ไม่ใช่พี่เลี้ยง" data-en="Screens as a tool, not a babysitter">หน้าจอเป็นเครื่องมือ ไม่ใช่พี่เลี้ยง</b><p data-th="การ์ตูนภาษาอังกฤษ 20 นาทีที่ดูด้วยกันแล้วคุยกัน มีค่ากว่า 2 ชั่วโมงที่ดูคนเดียว" data-en="Twenty minutes of an English cartoon watched together and talked about is worth more than two hours watched alone.">การ์ตูนภาษาอังกฤษ 20 นาทีที่ดูด้วยกันแล้วคุยกัน มีค่ากว่า 2 ชั่วโมงที่ดูคนเดียว</p></div>
+      <div class="road-card rv"><div class="road-ic">🇹🇭</div><b data-th="ภูมิใจในสองภาษา" data-en="Proud of both languages">ภูมิใจในสองภาษา</b><p data-th="ภาษาอังกฤษไม่ได้มาแทนภาษาไทย เด็กที่แข็งแรงในภาษาแม่ จะเรียนภาษาที่สองได้ดีกว่า" data-en="English does not replace Thai. A child strong in their mother tongue learns a second language better, not worse.">ภาษาอังกฤษไม่ได้มาแทนภาษาไทย เด็กที่แข็งแรงในภาษาแม่ จะเรียนภาษาที่สองได้ดีกว่า</p></div>
+      <div class="road-card rv"><div class="road-ic">🤝</div><b data-th="คุยกับครู" data-en="Talk to the teachers">คุยกับครู</b><p data-th="ถามว่าสัปดาห์นี้เรียนอะไร แล้วเอาคำนั้นไปใช้ที่บ้าน เมื่อบ้านกับโรงเรียนพูดเรื่องเดียวกัน ลูกจะเห็นว่ามันสำคัญ" data-en="Ask what this week&rsquo;s words were, then use them at home. When home and school talk about the same things, your child sees that it matters.">ถามว่าสัปดาห์นี้เรียนอะไร แล้วเอาคำนั้นไปใช้ที่บ้าน เมื่อบ้านกับโรงเรียนพูดเรื่องเดียวกัน ลูกจะเห็นว่ามันสำคัญ</p></div>
+      <div class="road-card rv card-cta"><div class="road-ic">🔊</div><b data-th="ฟังแนวทางทั้ง 7 ข้อ" data-en="Hear all seven read aloud">ฟังแนวทางทั้ง 7 ข้อ</b><p data-th="กดฟังขณะทำอาหาร หรือระหว่างรอรับลูก" data-en="Press play while you cook or wait for pickup.">กดฟังขณะทำอาหาร หรือระหว่างรอรับลูก</p><button class="btn btn-primary" type="button" id="listenTips" data-th="▶ ฟัง" data-en="▶ Listen">▶ ฟัง</button></div>
+    </div>
+  </div>
+</section>
+
+<!-- A week at home -->
+<section class="week">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="eyebrow" data-th="ทำได้จริง" data-en="Make it real">ทำได้จริง</span>
+      <h2 data-th="หนึ่งสัปดาห์ที่บ้าน ที่ไปทางเดียวกับโรงเรียน" data-en="A week at home that moves with the school">หนึ่งสัปดาห์ที่บ้าน ที่ไปทางเดียวกับโรงเรียน</h2>
+      <p data-th="ตัวอย่างเท่านั้น ปรับให้เข้ากับครอบครัวของคุณ ไม่มีวันไหนสมบูรณ์แบบ และไม่ต้องเป็น" data-en="Only an example — shape it to your family. No week is perfect, and it does not have to be.">ตัวอย่างเท่านั้น ปรับให้เข้ากับครอบครัวของคุณ ไม่มีวันไหนสมบูรณ์แบบ และไม่ต้องเป็น</p>
+    </div>
+    <div class="week-grid">
+      <div class="day rv"><b data-th="จันทร์" data-en="Monday">จันทร์</b><span>🍚</span><p data-th="ตั้งชื่ออาหารเย็นเป็นภาษาอังกฤษ 5 คำ" data-en="Name five things at dinner in English.">ตั้งชื่ออาหารเย็นเป็นภาษาอังกฤษ 5 คำ</p></div>
+      <div class="day rv"><b data-th="อังคาร" data-en="Tuesday">อังคาร</b><span>🎵</span><p data-th="เปิดเพลงที่เรียนที่ฮิลล์ท็อป ร้องด้วยกันในรถ" data-en="Play this week&rsquo;s Hilltop song in the car and sing along.">เปิดเพลงที่เรียนที่ฮิลล์ท็อป ร้องด้วยกันในรถ</p></div>
+      <div class="day rv"><b data-th="พุธ" data-en="Wednesday">พุธ</b><span>📺</span><p data-th="การ์ตูนภาษาอังกฤษ 20 นาที ดูด้วยกัน ถามว่า &ldquo;ชอบตัวไหน?&rdquo;" data-en="Twenty minutes of an English cartoon together. Ask, &ldquo;Who did you like?&rdquo;">การ์ตูนภาษาอังกฤษ 20 นาที ดูด้วยกัน ถามว่า &ldquo;ชอบตัวไหน?&rdquo;</p></div>
+      <div class="day rv"><b data-th="พฤหัส" data-en="Thursday">พฤหัส</b><span>✏️</span><p data-th="ให้ลูกสอนคุณ 3 คำที่เรียนมาสัปดาห์นี้ (เด็กชอบเป็นครู)" data-en="Let your child teach you three words from this week. Children love being the teacher.">ให้ลูกสอนคุณ 3 คำที่เรียนมาสัปดาห์นี้ (เด็กชอบเป็นครู)</p></div>
+      <div class="day rv"><b data-th="ศุกร์" data-en="Friday">ศุกร์</b><span>🏅</span><p data-th="ชมชัยชนะเล็ก ๆ ของสัปดาห์นี้ให้ชัดเจน หนึ่งอย่างก็พอ" data-en="Name one small victory from this week, out loud. One is enough.">ชมชัยชนะเล็ก ๆ ของสัปดาห์นี้ให้ชัดเจน หนึ่งอย่างก็พอ</p></div>
+      <div class="day rv"><b data-th="เสาร์" data-en="Saturday">เสาร์</b><span>🌳</span><p data-th="ออกไปข้างนอก ธรรมชาติ ตลาด สนามเด็กเล่น ภาษาเกิดจากประสบการณ์" data-en="Get outside — nature, the market, the playground. Language grows from experience.">ออกไปข้างนอก ธรรมชาติ ตลาด สนามเด็กเล่น ภาษาเกิดจากประสบการณ์</p></div>
+      <div class="day rv"><b data-th="อาทิตย์" data-en="Sunday">อาทิตย์</b><span>📖</span><p data-th="นิทานก่อนนอน ภาษาไหนก็ได้ กอดด้วย" data-en="A bedtime story in any language. With a hug.">นิทานก่อนนอน ภาษาไหนก็ได้ กอดด้วย</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Video -->
+<section class="invest parents-video">
+  <video class="cine-bg" autoplay muted loop playsinline preload="metadata" poster="assets/video/invest-bg.jpg"><source src="assets/video/invest-bg.mp4" type="video/mp4"></video>
+  <div class="cine-shade invest-shade"></div>
+  <div class="wrap">
+    <div class="invest-inner rv">
+      <span class="eyebrow" data-th="ดูสิ่งที่ลูกทำทุกบ่าย" data-en="See what your child does every afternoon">ดูสิ่งที่ลูกทำทุกบ่าย</span>
+      <h2 data-th="เมื่อคุณเห็นห้องเรียน คุณจะรู้ว่าจะคุยกับลูกเรื่องอะไร" data-en="When you see the classroom, you know what to talk about at home">เมื่อคุณเห็นห้องเรียน คุณจะรู้ว่าจะคุยกับลูกเรื่องอะไร</h2>
+      <p data-th="วิดีโอ 3 นาทีจากห้องเรียนของเรา ดูด้วยกันกับลูก แล้วถามว่า &ldquo;หนูชอบช่วงไหน?&rdquo;" data-en="Three minutes from our classrooms. Watch it with your child, then ask: &ldquo;Which part do you like?&rdquo;">วิดีโอ 3 นาทีจากห้องเรียนของเรา ดูด้วยกันกับลูก แล้วถามว่า &ldquo;หนูชอบช่วงไหน?&rdquo;</p>
+      <div class="invest-actions"><button class="btn btn-light" type="button" id="playStory"><span data-th="▶ ชมวิดีโอ 3:16" data-en="▶ Watch the film · 3:16">▶ ชมวิดีโอ 3:16</span></button></div>
+    </div>
+  </div>
+</section>
+<div class="lightbox" id="storyBox" hidden><div class="lb-inner"><button class="lb-close" type="button" aria-label="Close">✕</button><video id="storyVideo" controls playsinline preload="metadata" poster="assets/video/classes-bg.jpg"><source src="assets/video/hilltop-story.mp4" type="video/mp4"></video></div></div>
+
+<!-- Victories -->
+<section class="victories">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="eyebrow" data-th="ชัยชนะของครอบครัว" data-en="Family victories">ชัยชนะของครอบครัว</span>
+      <h2 data-th="พ่อแม่ที่เดินมาก่อน เล่าให้ฟัง" data-en="Parents who walked this road first">พ่อแม่ที่เดินมาก่อน เล่าให้ฟัง</h2>
+    </div>
+    <div class="cards3">
+      <div class="review rv"><p data-th="&ldquo;เรียนผ่านประสบการณ์จริง ไม่เครียด สนุก ลูกชายเรียนตั้งแต่ ป.2 ตอนนี้ใช้ภาษาอังกฤษได้จริงในชีวิตประจำวัน&rdquo;" data-en="&ldquo;Learning through real experience — stress-free and fun. My son studied here since Grade 2 and now uses English in everyday life.&rdquo;">&ldquo;เรียนผ่านประสบการณ์จริง ไม่เครียด สนุก ลูกชายเรียนตั้งแต่ ป.2 ตอนนี้ใช้ภาษาอังกฤษได้จริงในชีวิตประจำวัน&rdquo;</p><div class="who"><div class="avatar a1">ผ</div><div><b data-th="คุณแม่ของน้องอาร์ม" data-en="Arm&rsquo;s mother">คุณแม่ของน้องอาร์ม</b><span data-th="ผู้ปกครอง" data-en="Parent">ผู้ปกครอง</span></div></div></div>
+      <div class="review rv"><p data-th="&ldquo;ถ้าอยากให้ลูกเรียนอย่างมีความสุข ต้องฮิลล์ท็อป เจไดเรียนตั้งแต่ ป.2 ผลลัพธ์จริง คะแนน O-NET ดีมาก และครูใจดีมาก&rdquo;" data-en="&ldquo;For fun, happy learning it has to be Hilltop. Jedi studied here from Grade 2 — real results, excellent O-NET scores, and such kind teachers.&rdquo;">&ldquo;ถ้าอยากให้ลูกเรียนอย่างมีความสุข ต้องฮิลล์ท็อป เจไดเรียนตั้งแต่ ป.2 ผลลัพธ์จริง คะแนน O-NET ดีมาก และครูใจดีมาก&rdquo;</p><div class="who"><div class="avatar a2">ผ</div><div><b data-th="ผู้ปกครองของน้องเจได" data-en="Jedi&rsquo;s parent">ผู้ปกครองของน้องเจได</b><span data-th="ผู้ปกครอง" data-en="Parent">ผู้ปกครอง</span></div></div></div>
+      <div class="review rv"><p data-th="&ldquo;ครูรักเด็ก และสอดแทรกความรู้ในทุกกิจกรรม เด็ก ๆ มีความสุขกับการเรียนและเล่นด้วยกัน&rdquo;" data-en="&ldquo;The teachers love the children and weave knowledge into every activity — the kids are happy learning and playing together.&rdquo;">&ldquo;ครูรักเด็ก และสอดแทรกความรู้ในทุกกิจกรรม เด็ก ๆ มีความสุขกับการเรียนและเล่นด้วยกัน&rdquo;</p><div class="who"><div class="avatar a3">ผ</div><div><b data-th="ผู้ปกครอง" data-en="Parent">ผู้ปกครอง</b><span data-th="เชียงราย" data-en="Chiang Rai">เชียงราย</span></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Parent Notes (newsletter) -->
+<section class="notes" id="notes">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="eyebrow" data-th="จดหมายถึงผู้ปกครอง" data-en="Parent Notes">จดหมายถึงผู้ปกครอง</span>
+      <h2 data-th="เตือนใจสั้น ๆ ตลอดปีการศึกษา" data-en="Short reminders through the school year">เตือนใจสั้น ๆ ตลอดปีการศึกษา</h2>
+      <p data-th="เราจะเพิ่มฉบับใหม่ที่นี่ตลอดปี บันทึกลิงก์หน้านี้ไว้ หรือรับแจ้งเตือนทาง LINE" data-en="We add a new note here through the year. Bookmark this page, or get a nudge on LINE when a new one lands.">เราจะเพิ่มฉบับใหม่ที่นี่ตลอดปี บันทึกลิงก์หน้านี้ไว้ หรือรับแจ้งเตือนทาง LINE</p>
+    </div>
+    <div class="notes-grid">
+      <article class="note rv"><span class="note-date" data-th="พฤษภาคม · เปิดเทอม" data-en="May · Term starts">พฤษภาคม · เปิดเทอม</span><h3 data-th="เริ่มปีใหม่อย่างไรให้ลูกอยากมาโรงเรียน" data-en="Starting the year so your child wants to come">เริ่มปีใหม่อย่างไรให้ลูกอยากมาโรงเรียน</h3><p data-th="สัปดาห์แรกอย่าถามว่า &ldquo;เรียนอะไร&rdquo; ให้ถามว่า &ldquo;สนุกตรงไหน&rdquo; นอนให้พอ กินข้าวก่อนมาเรียน และบอกลูกว่าคุณภูมิใจที่เขากล้าลอง" data-en="In week one, don&rsquo;t ask &ldquo;What did you learn?&rdquo; Ask &ldquo;What was fun?&rdquo; Enough sleep, a snack before class, and tell your child you are proud they are trying.">สัปดาห์แรกอย่าถามว่า &ldquo;เรียนอะไร&rdquo; ให้ถามว่า &ldquo;สนุกตรงไหน&rdquo; นอนให้พอ กินข้าวก่อนมาเรียน และบอกลูกว่าคุณภูมิใจที่เขากล้าลอง</p><button class="note-listen" type="button" data-th="🔊 ฟัง" data-en="🔊 Listen">🔊 ฟัง</button></article>
+      <article class="note rv"><span class="note-date" data-th="กรกฎาคม · กลางเทอม" data-en="July · Mid-term">กรกฎาคม · กลางเทอม</span><h3 data-th="เมื่อลูกบอกว่า &ldquo;ไม่อยากไป&rdquo;" data-en="When your child says &ldquo;I don&rsquo;t want to go&rdquo;">เมื่อลูกบอกว่า &ldquo;ไม่อยากไป&rdquo;</h3><p data-th="เกือบทุกคนเจอ มักเป็นความเหนื่อย ไม่ใช่ความเกลียด ฟังก่อน อย่าเพิ่งต่อรอง แล้วบอกครูของเรา เราปรับได้เสมอ" data-en="Nearly every family hits this. It is usually tiredness, not dislike. Listen first, don&rsquo;t bargain yet, and tell our teachers — we can always adjust.">เกือบทุกคนเจอ มักเป็นความเหนื่อย ไม่ใช่ความเกลียด ฟังก่อน อย่าเพิ่งต่อรอง แล้วบอกครูของเรา เราปรับได้เสมอ</p><button class="note-listen" type="button" data-th="🔊 ฟัง" data-en="🔊 Listen">🔊 ฟัง</button></article>
+      <article class="note rv"><span class="note-date" data-th="ตุลาคม · ปิดเทอม" data-en="October · Term break">ตุลาคม · ปิดเทอม</span><h3 data-th="ปิดเทอมโดยไม่ลืมทุกอย่าง" data-en="A break without forgetting everything">ปิดเทอมโดยไม่ลืมทุกอย่าง</h3><p data-th="ไม่ต้องติว แค่รักษาภาษาให้ &ldquo;อุ่น&rdquo;: เพลงในรถ การ์ตูนสัปดาห์ละครั้ง และให้ลูกสั่งอาหารเป็นภาษาอังกฤษเวลาเจอนักท่องเที่ยว" data-en="No tutoring needed. Just keep the language warm: songs in the car, one cartoon a week, and let your child order in English when you meet a tourist.">ไม่ต้องติว แค่รักษาภาษาให้ &ldquo;อุ่น&rdquo;: เพลงในรถ การ์ตูนสัปดาห์ละครั้ง และให้ลูกสั่งอาหารเป็นภาษาอังกฤษเวลาเจอนักท่องเที่ยว</p><button class="note-listen" type="button" data-th="🔊 ฟัง" data-en="🔊 Listen">🔊 ฟัง</button></article>
+      <article class="note rv"><span class="note-date" data-th="มกราคม · ก่อนสอบ" data-en="January · Before exams">มกราคม · ก่อนสอบ</span><h3 data-th="คะแนนสำคัญ แต่ความมั่นใจสำคัญกว่า" data-en="Scores matter. Confidence matters more">คะแนนสำคัญ แต่ความมั่นใจสำคัญกว่า</h3><p data-th="เด็กที่กล้าพูดจะทำข้อสอบได้ดีกว่าเด็กที่ท่องเก่งแต่กลัว ก่อนสอบ ให้ลูกเล่าเรื่องเป็นภาษาอังกฤษให้ฟัง 2 นาที แค่นั้นพอ" data-en="A child who dares to speak outperforms a child who memorizes but is afraid. Before a test, let your child tell you a two-minute story in English. That is enough.">เด็กที่กล้าพูดจะทำข้อสอบได้ดีกว่าเด็กที่ท่องเก่งแต่กลัว ก่อนสอบ ให้ลูกเล่าเรื่องเป็นภาษาอังกฤษให้ฟัง 2 นาที แค่นั้นพอ</p><button class="note-listen" type="button" data-th="🔊 ฟัง" data-en="🔊 Listen">🔊 ฟัง</button></article>
+    </div>
+    <div class="notes-sub rv">
+      <div><b data-th="รับแจ้งเตือนฉบับใหม่" data-en="Get new notes">รับแจ้งเตือนฉบับใหม่</b><span data-th="เพิ่มเพื่อนใน LINE แล้วพิมพ์ &ldquo;Parent Notes&rdquo;" data-en="Add us on LINE and type &ldquo;Parent Notes&rdquo;">เพิ่มเพื่อนใน LINE แล้วพิมพ์ &ldquo;Parent Notes&rdquo;</span></div>
+      <a class="btn btn-primary" href="https://lin.ee/mpPx8sn" target="_blank" rel="noopener">LINE →</a>
+    </div>
+  </div>
+</section>
+
+<div class="cta-section">
+  <div class="wrap">
+    <div class="cta rv">
+      <h2 data-th="มีคำถาม กังวล หรืออยากเล่าชัยชนะของลูก?" data-en="A question, a worry, or a victory to share?">มีคำถาม กังวล หรืออยากเล่าชัยชนะของลูก?</h2>
+      <p data-th="ครูมายด์และทีมยินดีคุยเสมอ ก่อนเรียน หลังเรียน หรือทางโทรศัพท์" data-en="Teacher Mind and the team are always glad to talk — before class, after class, or by phone.">ครูมายด์และทีมยินดีคุยเสมอ ก่อนเรียน หลังเรียน หรือทางโทรศัพท์</p>
+      <a class="btn" href="contact.html" data-th="ติดต่อเรา" data-en="Contact us">ติดต่อเรา</a>
+      <a class="btn btn-outline" href="staff.html" style="margin-left:10px" data-th="พบครูของเรา" data-en="Meet the teachers">พบครูของเรา</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-bottom" style="border:0;padding-top:0">
+      <span data-th="© 2026 โรงเรียนสอนภาษาอังกฤษฮิลล์ท็อป" data-en="© 2026 Hilltop English School">© 2026 โรงเรียนสอนภาษาอังกฤษฮิลล์ท็อป</span>
+      <span><a href="index.html" data-th="กลับหน้าแรก" data-en="Back to Home">กลับหน้าแรก</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/site.js"></script>
+</body>
+</html>

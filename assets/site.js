@@ -200,6 +200,14 @@ if(slides.length>1){
   </g>
 </svg>`;
   const SCRIPTS={
+    parents:[
+      ['TH','สวัสดีครับคุณพ่อคุณแม่ ผมฮิลลี่ครับ 👋'],['TH','ผมรู้ว่าการเลี้ยงลูกให้เก่งสองภาษาไม่ง่ายเลย'],
+      ['EN','Hi Mum, hi Dad — Hilly here.'],['EN','I know raising a bilingual child is not easy. Some days are hard.'],
+      ['EN','But here is a secret from the classroom: the children who grow fastest have parents who talk with them, not just about them.'],
+      ['EN','You don\'t need perfect English. You need ten minutes, a smile, and a question like "What was fun today?"'],
+      ['EN','Read to them in Thai. Sing with them in English. Praise the trying, not just the right answer.'],
+      ['EN','And when you are tired, that\'s okay. Tomorrow is another ten minutes.'],
+      ['EN','You are your child\'s first teacher. We are honored to be the second.'],['TH','เราอยู่ข้างคุณเสมอครับ 🐑']],
     thailand:[
       ['TH','สวัสดีครับ! 👋'],['TH','ผมชื่อ ฮิลลี่ เป็นแกะประจำโรงเรียนฮิลล์ท็อปครับ'],['TH','ขอลองพูดภาษาอังกฤษให้ฟังนะครับ…'],
       ['EN','Hi! I\'m Hilly, the Hilltop sheep.'],['EN','See? I just switched to English. Easy!'],['EN','I was born on this hill in Nanglae, Chiang Rai.'],
@@ -292,4 +300,25 @@ document.querySelectorAll('[data-slider]').forEach(sl=>{
   function open(){lb.hidden=false;document.body.style.overflow='hidden';v.play().catch(()=>{})}
   function close(){v.pause();lb.hidden=true;document.body.style.overflow=''}
   b.addEventListener('click',open);lb.querySelector('.lb-close').addEventListener('click',close);lb.addEventListener('click',e=>{if(e.target===lb)close()});addEventListener('keydown',e=>{if(e.key==='Escape'&&!lb.hidden)close()});
+})();
+
+// ---- Parents page: read aloud with the browser voice ----
+(function(){
+  if(!('speechSynthesis' in window))return;
+  const synth=speechSynthesis;let active=null;
+  function speak(text,btn){
+    if(active===btn){synth.cancel();return}
+    synth.cancel();document.querySelectorAll('.note-listen.on').forEach(b=>b.classList.remove('on'));
+    const lang=document.documentElement.lang==='en'?'en-US':'th-TH';
+    const u=new SpeechSynthesisUtterance(text);u.lang=lang;u.rate=lang==='th-TH'?1:0.95;
+    const v=synth.getVoices().find(v=>v.lang.replace('_','-').toLowerCase().startsWith(lang.slice(0,2)));if(v)u.voice=v;
+    active=btn;btn&&btn.classList.add('on');
+    u.onend=u.onerror=()=>{active=null;btn&&btn.classList.remove('on')};
+    synth.speak(u);
+  }
+  const txt=el=>el.textContent.replace(/\s+/g,' ').trim();
+  document.querySelectorAll('.note-listen').forEach(b=>b.addEventListener('click',()=>{const a=b.closest('.note');speak(txt(a.querySelector('h3'))+'. '+txt(a.querySelector('p')),b)}));
+  const tips=document.getElementById('listenTips');if(tips)tips.addEventListener('click',()=>{speak([...document.querySelectorAll('.practices .road-card:not(.card-cta)')].map(c=>txt(c.querySelector('b'))+'. '+txt(c.querySelector('p'))).join(' '),tips)});
+  const hero=document.getElementById('listenHero');if(hero)hero.addEventListener('click',()=>{const h=document.querySelector('.parents-hero');speak(txt(h.querySelector('h1'))+'. '+txt(h.querySelector('p')),hero)});
+  addEventListener('beforeunload',()=>synth.cancel());
 })();
