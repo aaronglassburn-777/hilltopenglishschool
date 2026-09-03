@@ -701,3 +701,15 @@ html,body{max-width:100%;overflow-x:clip}
 /* ===== typed heading ===== */
 [data-typed]{min-height:1.25em}
 [data-typed] .tcur{display:inline-block;width:3px;height:.9em;background:var(--clay);vertical-align:-.08em;margin-left:4px;animation:cur .8s steps(1) infinite}
+
+/* ===== Contact: motto video band with sliding + typing phrases ===== */
+.motto{position:relative;color:#fff;overflow:hidden;background:var(--forest-deep);padding:0;min-height:clamp(380px,55vh,600px);display:grid;align-items:center}
+.motto-shade{background:linear-gradient(180deg,rgba(15,35,27,.7),rgba(15,35,27,.55) 50%,rgba(15,35,27,.85))}
+.motto-inner{position:relative;z-index:2;text-align:center}
+.motto .eyebrow{color:var(--sun-soft)}
+.motto-stage{min-height:3.2em;display:grid;place-items:center;perspective:800px}
+.motto-line{font-family:var(--f-head);font-weight:700;font-size:clamp(1.6rem,4vw,3rem);line-height:1.25;max-width:22ch;margin:0 auto;text-shadow:0 6px 24px rgba(0,0,0,.5);opacity:0;transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
+.motto-line.in{opacity:1;transform:none!important}
+.motto-line.out{opacity:0;transition-duration:.5s}
+.motto-line .tcur{display:inline-block;width:4px;height:.85em;background:var(--sun);vertical-align:-.08em;margin-left:6px;animation:cur .8s steps(1) infinite}
+.motto-line em{font-style:normal;color:var(--sun)}
