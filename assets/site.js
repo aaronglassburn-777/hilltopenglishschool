@@ -143,23 +143,24 @@ if(slides.length>1){
   addEventListener('keydown',e=>{if(e.key==='Escape'&&!lb.hidden)close()});
 })();
 
-// ---- visit: hand + roller image changer ----
+// ---- visit: random slideshow with Hilly cameos ----
 (function(){
   const box=document.querySelector('.roller-box');if(!box)return;
-  const imgs=[...box.querySelectorAll('.rs-img')],hand=box.querySelector('.hand');
-  let cur=0,busy=false;
-  function step(){
-    if(busy||document.hidden)return;busy=true;
-    const nxt=(cur+1)%imgs.length,a=imgs[cur],b=imgs[nxt];
-    b.classList.add('next');
-    hand.className='hand enter';
-    setTimeout(()=>{hand.className='hand roll';b.classList.add('rolling')},700);
-    setTimeout(()=>{hand.className='hand exit';a.classList.remove('on');b.classList.remove('next','rolling');b.classList.add('on');cur=nxt},2350);
-    setTimeout(()=>{hand.className='hand';busy=false},3000);
+  const imgs=[...box.querySelectorAll('.rs-img')],stage=box.querySelector('.roller-stage'),hw=box.querySelector('.hilly-visit');
+  let cur=0,n=0,busy=false;
+  function swap(){let k;do{k=Math.floor(Math.random()*imgs.length)}while(k===cur&&imgs.length>1);imgs[cur].classList.remove('on');cur=k;imgs[cur].classList.add('on')}
+  function cameo(){
+    if(!hw||!hw._hilly){swap();return}
+    busy=true;stage.classList.add('dim');hw.className='hilly-wrap hilly-visit walk-in';
+    setTimeout(()=>{hw.className='hilly-wrap hilly-visit stand';hw._hilly.say(()=>{
+      hw.className='hilly-wrap hilly-visit walk-out';
+      setTimeout(()=>{swap();stage.classList.remove('dim');hw.className='hilly-wrap hilly-visit';busy=false},1500);
+    })},1700);
   }
-  const io2=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting&&!box.dataset.live){box.dataset.live=1;setTimeout(step,1500);setInterval(step,5500)}})},{threshold:.4});
+  function tick(){if(document.hidden||busy)return;n++;if(n%3===0)cameo();else swap()}
+  const io2=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting&&!box.dataset.live){box.dataset.live=1;setInterval(tick,6000);setTimeout(cameo,2500)}})},{threshold:.4});
   io2.observe(box);
-  box.addEventListener('click',step);
+  box.addEventListener('click',()=>{if(!busy)cameo()});
 })();
 
 // ---- visit carousel caption follows the active image ----
@@ -222,6 +223,12 @@ if(slides.length>1){
       ['EN','What does it cost? Which days? Is it hard? It\'s all right here.'],['EN','Still wondering about something? Call Teacher Mind or send us a LINE message.'],
       ['EN','Or better: come and watch a class. Seeing is believing.'],['TH','อ่านคำตอบด้านข้างได้เลยครับ แล้วมาเจอกันนะ! 🐑']]
   };
+  const SCRIPTS_VISIT=[
+    ['EN','Come and visit us! สวัสดีครับ!'],['EN','This is our classroom. Real kids, real English.'],['EN','Weekdays, 3:30 to 7. Just drop by! มาเลยนะครับ'],
+    ['EN','Call Teacher Mind. She loves questions.'],['EN','Small classes. Big smiles. ยิ้มกว้าง ๆ'],['EN','Every child gets a turn to talk here.'],
+    ['EN','See you at the top of the hill! แล้วเจอกันนะ'],['EN','Bring your child. Watch a class. No pressure.'],['EN','We speak English all afternoon. And a little Thai. นิดหน่อย']
+  ];
+  SCRIPTS.visit=SCRIPTS_VISIT;
   document.querySelectorAll('[data-hilly]').forEach(wrap=>{
     const script=SCRIPTS[wrap.dataset.hilly]||SCRIPTS.thailand;
     wrap.innerHTML='<div class="bubble"><span class="lang">TH</span><span class="htxt"></span><span class="cursor"></span></div><div class="ground"></div>'+SVG+'<div class="hilly-name" data-th="ฮิลลี่ · แกะน้อยแห่งฮิลล์ท็อป" data-en="Hilly · the Hilltop sheep">ฮิลลี่ · แกะน้อยแห่งฮิลล์ท็อป</div>';
@@ -234,6 +241,11 @@ if(slides.length>1){
       if(document.hidden){timer=setTimeout(next,1500);return}
       const [l,s]=script[i];lang.textContent=l;bub.classList.add('show');
       type(s,()=>{timer=setTimeout(()=>{i=(i+1)%script.length;if(i===0){bub.classList.remove('show');timer=setTimeout(next,2500)}else next()},Math.max(1800,s.length*70))});
+    }
+    if(wrap.hasAttribute('data-hilly-manual')){
+      let k=Math.floor(Math.random()*script.length);
+      wrap._hilly={say(cb){const [l,s]=script[k];k=(k+1)%script.length;lang.textContent=l;bub.classList.add('show');type(s,()=>setTimeout(()=>{bub.classList.remove('show');cb&&cb()},Math.max(1500,s.length*55)))}};
+      return;
     }
     new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting&&!running){running=true;setTimeout(next,600)}}),{threshold:.3}).observe(el);
     el.addEventListener('click',()=>{clearTimeout(timer);el.classList.remove('talking');i=(i+1)%script.length;next()});
