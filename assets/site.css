@@ -896,3 +896,9 @@ html,body{max-width:100%;overflow-x:clip}
 @keyframes hbIn{from{opacity:0;left:100%}12%{opacity:1}to{opacity:1;left:58%}}
 @keyframes hbOut{from{opacity:1;left:58%}90%{opacity:1}to{opacity:0;left:-20%}}
 @media(max-width:900px){.hilly-band{display:none}}
+/* Teacher photos: small photo hangs off the lower-left corner so it never covers Teacher Mind */
+.teacher-photos{padding:0 0 34px 26px}
+.teacher-photos .main img{object-position:62% 30%}
+.teacher-photos .small{width:36%;right:auto;left:-26px;bottom:0;aspect-ratio:1/1.15;rotate:-3deg;transition:rotate .5s,transform .5s}
+.teacher-photos:hover .small{rotate:0deg;transform:translateY(-6px)}
+@media(max-width:900px){.teacher-photos .small{left:0}}
