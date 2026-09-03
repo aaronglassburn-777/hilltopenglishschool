@@ -127,3 +127,37 @@ if(slides.length>1){
   }),{threshold:.5});
   nums.forEach(n=>ob.observe(n));
 })();
+
+// ---- video clips: play on hover / when visible, open full video ----
+(function(){
+  const clips=document.querySelectorAll('.clip video');
+  if(!clips.length)return;
+  const vo=new IntersectionObserver(es=>es.forEach(e=>{const v=e.target;if(e.isIntersecting){v.play().catch(()=>{})}else v.pause()}),{threshold:.4});
+  clips.forEach(v=>vo.observe(v));
+  const lb=document.getElementById('lightbox'),fv=document.getElementById('fullVideo');
+  function open(){lb.hidden=false;document.body.style.overflow='hidden';fv.play().catch(()=>{})}
+  function close(){fv.pause();lb.hidden=true;document.body.style.overflow=''}
+  document.querySelectorAll('.clip,#playFull').forEach(b=>b.addEventListener('click',open));
+  lb.querySelector('.lb-close').addEventListener('click',close);
+  lb.addEventListener('click',e=>{if(e.target===lb)close()});
+  addEventListener('keydown',e=>{if(e.key==='Escape'&&!lb.hidden)close()});
+})();
+
+// ---- visit: hand + roller image changer ----
+(function(){
+  const box=document.querySelector('.roller-box');if(!box)return;
+  const imgs=[...box.querySelectorAll('.rs-img')],hand=box.querySelector('.hand');
+  let cur=0,busy=false;
+  function step(){
+    if(busy||document.hidden)return;busy=true;
+    const nxt=(cur+1)%imgs.length,a=imgs[cur],b=imgs[nxt];
+    b.classList.add('next');
+    hand.className='hand enter';
+    setTimeout(()=>{hand.className='hand roll';b.classList.add('rolling')},700);
+    setTimeout(()=>{hand.className='hand exit';a.classList.remove('on');b.classList.remove('next','rolling');b.classList.add('on');cur=nxt},2350);
+    setTimeout(()=>{hand.className='hand';busy=false},3000);
+  }
+  const io2=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting&&!box.dataset.live){box.dataset.live=1;setTimeout(step,1500);setInterval(step,5500)}})},{threshold:.4});
+  io2.observe(box);
+  box.addEventListener('click',step);
+})();
