@@ -752,3 +752,16 @@ html,body{max-width:100%;overflow-x:clip}
 @keyframes legB{0%,100%{transform:rotate(-14deg)}50%{transform:rotate(14deg)}}
 .hilly-visit.stand .hilly{animation:hillyBob 3.2s ease-in-out infinite}
 @media(max-width:640px){.hilly-visit{width:48%}.hilly-visit .bubble{font-size:.82rem}}
+
+/* ===== Classes: semesters ===== */
+.slider-cap .rs-cap{z-index:3}
+.slider-cap .slider-dots{bottom:auto;top:14px;right:14px}
+.slider-cap{aspect-ratio:4/4}
+.sem-tiles{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:6px 0 22px}
+.sem{background:var(--paper);border:1px solid rgba(30,77,59,.08);border-radius:16px;padding:18px 20px;box-shadow:0 6px 18px rgba(20,53,40,.05);position:relative;overflow:hidden}
+.sem::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--sun)}
+.sem:nth-child(2)::before{background:var(--clay)}
+.sem small{display:block;font-family:var(--f-head);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:4px}
+.sem b{display:block;font-family:var(--f-head);font-size:1.15rem;color:var(--forest-deep)}
+.sem span{display:block;font-size:.82rem;color:var(--ink-soft);margin-top:4px}
+@media(max-width:480px){.sem-tiles{grid-template-columns:1fr}}

@@ -287,7 +287,10 @@ document.querySelectorAll('[data-slider]').forEach(sl=>{
   if(sl.hasAttribute('data-shuffle')){imgs.forEach(i=>i.classList.remove('on'));imgs.sort(()=>Math.random()-.5);imgs.forEach(i=>sl.insertBefore(i,dots));imgs[0].classList.add('on')}
   imgs.forEach((_,i)=>{const b=document.createElement('button');b.setAttribute('aria-label','Photo '+(i+1));if(!i)b.classList.add('on');b.addEventListener('click',()=>{show(i);restart()});dots.appendChild(b)});
   const bs=dots.querySelectorAll('button');
-  function show(i){imgs[cur].classList.remove('on');bs[cur].classList.remove('on');cur=i;imgs[cur].classList.add('on');bs[cur].classList.add('on')}
+  const cap=sl.querySelector('.cap-text');
+  function setCap(){if(!cap)return;const l=document.documentElement.lang==='en'?'capEn':'capTh';const t=imgs[cur].dataset[l];if(t&&cap.textContent!==t){cap.classList.add('fade');setTimeout(()=>{cap.textContent=t;cap.classList.remove('fade')},350)}}
+  function show(i){imgs[cur].classList.remove('on');bs[cur].classList.remove('on');cur=i;imgs[cur].classList.add('on');bs[cur].classList.add('on');setCap()}
+  setCap();document.getElementById('langToggle')?.addEventListener('click',()=>setTimeout(setCap,50));
   let t;function tick(){if(document.hidden)return;let n;do{n=Math.floor(Math.random()*imgs.length)}while(n===cur&&imgs.length>1);show(n)}
   function restart(){clearInterval(t);t=setInterval(tick,7000)}restart();
 });
