@@ -263,10 +263,26 @@ if(slides.length>1){
 
 // ---- simple random slider (data-slider) ----
 document.querySelectorAll('[data-slider]').forEach(sl=>{
-  const imgs=[...sl.querySelectorAll('img')],dots=sl.querySelector('.slider-dots');let cur=0;
+  let imgs=[...sl.querySelectorAll('img')];const dots=sl.querySelector('.slider-dots');let cur=0;
+  if(sl.hasAttribute('data-shuffle')){imgs.forEach(i=>i.classList.remove('on'));imgs.sort(()=>Math.random()-.5);imgs.forEach(i=>sl.insertBefore(i,dots));imgs[0].classList.add('on')}
   imgs.forEach((_,i)=>{const b=document.createElement('button');b.setAttribute('aria-label','Photo '+(i+1));if(!i)b.classList.add('on');b.addEventListener('click',()=>{show(i);restart()});dots.appendChild(b)});
   const bs=dots.querySelectorAll('button');
   function show(i){imgs[cur].classList.remove('on');bs[cur].classList.remove('on');cur=i;imgs[cur].classList.add('on');bs[cur].classList.add('on')}
   let t;function tick(){if(document.hidden)return;let n;do{n=Math.floor(Math.random()*imgs.length)}while(n===cur&&imgs.length>1);show(n)}
   function restart(){clearInterval(t);t=setInterval(tick,7000)}restart();
 });
+
+// ---- Why English cards: light one at a time, random pulse ----
+(function(){const cards=[...document.querySelectorAll('.road-card')];if(!cards.length)return;let cur=-1;
+  function lit(){if(document.hidden)return;let n;do{n=Math.floor(Math.random()*cards.length)}while(n===cur);if(cur>=0)cards[cur].classList.remove('lit');cur=n;cards[cur].classList.add('lit')}
+  new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting&&!cards[0].dataset.live){cards[0].dataset.live=1;lit();setInterval(lit,3600)}}),{threshold:.3}).observe(cards[0]);
+})();
+
+// ---- Timeline: progression animation ----
+(function(){const tl=document.getElementById('growTimeline');if(!tl)return;const li=[...tl.children];let i=-1;
+  function step(){if(document.hidden)return;li.forEach(l=>l.classList.remove('now'));i=(i+1)%(li.length+1);
+    if(i===li.length){li.forEach(l=>l.classList.remove('done'));tl.style.setProperty('--fill','0%');i=-1;return}
+    li.forEach((l,k)=>l.classList.toggle('done',k<i));li[i].classList.add('now');tl.style.setProperty('--fill',((i+.5)/li.length*100)+'%')}
+  new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting&&!tl.dataset.live){tl.dataset.live=1;step();setInterval(step,2600)}}),{threshold:.4}).observe(tl);
+  li.forEach((l,k)=>l.addEventListener('click',()=>{i=k-1;step()}));
+})();

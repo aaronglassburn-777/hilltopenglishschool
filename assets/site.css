@@ -588,3 +588,39 @@ html,body{max-width:100%;overflow-x:clip}
 .slider-dots{position:absolute;right:16px;bottom:14px;display:flex;gap:7px;z-index:2}
 .slider-dots button{width:9px;height:9px;border-radius:50%;border:0;padding:0;background:rgba(255,255,255,.55);cursor:pointer;transition:.3s}
 .slider-dots button.on{background:#fff;transform:scale(1.35)}
+
+/* ===== Why English cards: cycling edge glow + gentle pulse ===== */
+.road-card{position:relative;transition:transform .8s cubic-bezier(.34,1.3,.5,1),box-shadow .6s,background .35s}
+.road-card::after{content:"";position:absolute;inset:-2px;border-radius:calc(var(--radius) + 2px);padding:2px;pointer-events:none;opacity:0;transition:opacity .6s;
+  background:conic-gradient(from var(--ring),var(--sun),var(--clay),var(--leaf),var(--sun));
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);mask-composite:exclude}
+.road-card.lit::after{opacity:1;animation:ringSpin 3s linear infinite}
+.road-card.lit{transform:translateY(-4px) scale(1.035);box-shadow:var(--shadow);background:#fff}
+.road-card.lit .road-ic{animation:icPop .6s cubic-bezier(.34,1.56,.64,1)}
+@keyframes icPop{50%{transform:scale(1.25) rotate(-6deg)}}
+
+/* ===== Timeline: age progression ===== */
+.timeline{border-left-color:rgba(244,168,61,.35)}
+.timeline::before{content:"";position:absolute;left:-3px;top:0;width:3px;height:var(--fill,0%);background:linear-gradient(180deg,var(--sun),var(--clay));border-radius:3px;transition:height 1.2s ease}
+.timeline li{padding-left:64px;min-height:64px;transition:transform .5s}
+.timeline li::before{transition:background .4s,box-shadow .4s,transform .4s}
+.timeline li.done::before,.timeline li.now::before{background:var(--clay);box-shadow:0 0 0 2px var(--sun)}
+.timeline li.now::before{transform:scale(1.35);box-shadow:0 0 0 4px rgba(244,168,61,.35),0 0 18px rgba(244,168,61,.7)}
+.tl-fig{position:absolute;left:14px;top:-4px;font-style:normal;font-size:1.3rem;line-height:1;display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:var(--cream);border:2px solid rgba(30,77,59,.08);transform:scale(.8);opacity:.55;transition:transform .5s cubic-bezier(.34,1.56,.64,1),opacity .4s,background .4s}
+.timeline li.done .tl-fig{opacity:1;transform:scale(1)}
+.timeline li.now .tl-fig{opacity:1;transform:scale(1.35);background:#fff;box-shadow:0 8px 20px rgba(20,53,40,.18)}
+.timeline li.now b{color:var(--clay)}
+
+/* ===== Life gallery: 3D story crawl on hover ===== */
+.gallery{grid-template-columns:repeat(4,1fr)}
+.gallery .g{position:relative;perspective:600px}
+.g-story{position:absolute;inset:0;display:grid;place-items:center;background:linear-gradient(180deg,rgba(20,53,40,.55),rgba(20,53,40,.9));opacity:0;transition:opacity .4s;pointer-events:none;overflow:hidden}
+.g:hover .g-story,.g:focus-within .g-story{opacity:1}
+.st{position:absolute;width:38%;color:var(--sun-soft);opacity:0;transform:translateY(60%) scale(.15) rotateX(35deg);filter:drop-shadow(0 10px 16px rgba(0,0,0,.4))}
+.g:hover .st{animation:crawl 2.4s cubic-bezier(.2,.7,.2,1) infinite}
+.g:hover .st2{animation-delay:.8s;color:#fff}
+.g:hover .st3{animation-delay:1.6s;color:var(--sun)}
+@keyframes crawl{0%{opacity:0;transform:translateY(70%) scale(.12) rotateX(40deg)}18%{opacity:1}55%{opacity:1;transform:translateY(-10%) scale(.9) rotateX(10deg)}75%{opacity:0;transform:translateY(-70%) scale(1.5) rotateX(0)}100%{opacity:0}}
+.st-cap{position:absolute;left:0;right:0;bottom:12px;text-align:center;color:#fff;font-family:var(--f-head);font-size:.78rem;font-weight:600;padding:0 8px;text-shadow:0 2px 6px rgba(0,0,0,.6);opacity:0;transform:translateY(8px);transition:.5s .2s}
+.g:hover .st-cap{opacity:1;transform:none}
+@media(max-width:700px){.gallery{grid-template-columns:repeat(2,1fr)}}
