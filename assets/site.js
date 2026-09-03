@@ -410,3 +410,15 @@ document.querySelectorAll('.kb-band').forEach(b=>{
     else if(!mobile&&board.parentElement===text){side.prepend(board);if(hint)side.appendChild(hint)}}
   place();addEventListener('resize',place);
 })();
+
+// ---- Parents: victories path + rotating highlight; "hard days" fades after a random delay ----
+(function(){
+  const g=document.getElementById('victGrid');
+  if(g){const cards=[...g.querySelectorAll('.vict')];let k=-1;
+    new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting&&!g.dataset.live){g.dataset.live=1;g.classList.add('in');
+      const step=()=>{if(document.hidden)return;if(k>=0)cards[k].classList.remove('lit');k=(k+1)%cards.length;cards[k].classList.add('lit')};setTimeout(()=>{step();setInterval(step,3800)},2200)}}),{threshold:.3}).observe(g);}
+  const hard=document.querySelector('.soften .s-hard');
+  if(hard){const delay=[10000,60000,120000][Math.floor(Math.random()*3)];
+    const h=hard.closest('.rv');const start=()=>setTimeout(()=>{const el=document.querySelector('.soften .s-hard');if(el){el.style.transition='opacity 3s ease';el.style.opacity='0'}},delay+2500);
+    if(h&&h.classList.contains('in'))start();else new IntersectionObserver((es,o)=>es.forEach(e=>{if(e.isIntersecting){o.disconnect();start()}}),{threshold:.3}).observe(h||hard);}
+})();
