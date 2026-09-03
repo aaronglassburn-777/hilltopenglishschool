@@ -230,6 +230,7 @@ if(slides.length>1){
     ['EN','See you at the top of the hill! แล้วเจอกันนะ'],['EN','Bring your child. Watch a class. No pressure.'],['EN','We speak English all afternoon. And a little Thai. นิดหน่อย']
   ];
   SCRIPTS.visit=SCRIPTS_VISIT;
+  SCRIPTS.reviewsband=[['EN','Real parents. Real words. จริง ๆ นะ'],['EN','Ten years of happy kids!'],['EN','Read a few. Then come visit.'],['EN','Five stars. Every time. ⭐'],['EN','Their success could be yours. มาเลย!'],['EN','Hi! I read all of these too.']];
   document.querySelectorAll('[data-hilly]').forEach(wrap=>{
     const script=SCRIPTS[wrap.dataset.hilly]||SCRIPTS.thailand;
     wrap.innerHTML='<div class="bubble"><span class="lang">TH</span><span class="htxt"></span><span class="cursor"></span></div><div class="ground"></div>'+SVG+'<div class="hilly-name" data-th="ฮิลลี่ · แกะน้อยแห่งฮิลล์ท็อป" data-en="Hilly · the Hilltop sheep">ฮิลลี่ · แกะน้อยแห่งฮิลล์ท็อป</div>';
@@ -421,4 +422,23 @@ document.querySelectorAll('.kb-band').forEach(b=>{
   if(hard){const delay=[10000,60000,120000][Math.floor(Math.random()*3)];
     const h=hard.closest('.rv');const start=()=>setTimeout(()=>{const el=document.querySelector('.soften .s-hard');if(el){el.style.transition='opacity 3s ease';el.style.opacity='0'}},delay+2500);
     if(h&&h.classList.contains('in'))start();else new IntersectionObserver((es,o)=>es.forEach(e=>{if(e.isIntersecting){o.disconnect();start()}}),{threshold:.3}).observe(h||hard);}
+})();
+
+// ---- Reviews band: typed trust line (retypes on each quote change) + Hilly runs across ----
+(function(){
+  const line=document.getElementById('trustLine');if(!line)return;
+  const parts=[...line.querySelectorAll('span')];
+  let run=0;
+  function type(){const id=++run;const l=document.documentElement.lang==='en'?'en':'th';parts.forEach(p=>{p.textContent='';p.classList.remove('sep-after')});
+    let pi=0,k=0;(function step(){if(id!==run)return;if(pi>=parts.length)return;const full=parts[pi].dataset[l];
+      if(k<=full.length){parts[pi].textContent=full.slice(0,k++);setTimeout(step,full.charCodeAt(0)>3000?55:42)}
+      else{if(pi<parts.length-1){parts[pi].insertAdjacentHTML('afterend','');parts[pi].textContent+=' · '}pi++;k=0;setTimeout(step,260)}})()}
+  new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting&&!line.dataset.live){line.dataset.live=1;setTimeout(type,600)}}),{threshold:.3}).observe(line);
+  new MutationObserver(ms=>{if(ms.some(m=>m.target.classList.contains('on')&&line.dataset.live))type()}).observe(line.closest('.kb-band'),{attributes:true,subtree:true,attributeFilter:['class']});
+  document.getElementById('langToggle')?.addEventListener('click',()=>setTimeout(type,80));
+  // Hilly run
+  const hw=document.querySelector('.hilly-band');if(!hw)return;let busy=false;
+  function runHilly(){if(busy||document.hidden||!hw._hilly)return;busy=true;hw.className='hilly-wrap hilly-visit hilly-band walk-in';
+    setTimeout(()=>{hw.className='hilly-wrap hilly-visit hilly-band stand';hw._hilly.say(()=>{hw.className='hilly-wrap hilly-visit hilly-band walk-out';setTimeout(()=>{hw.className='hilly-wrap hilly-visit hilly-band';busy=false},1600)})},1800)}
+  new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting&&!hw.dataset.live){hw.dataset.live=1;setTimeout(runHilly,3000);setInterval(runHilly,16000)}}),{threshold:.3}).observe(hw.closest('.kb-band'));
 })();

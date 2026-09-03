@@ -879,3 +879,20 @@ html,body{max-width:100%;overflow-x:clip}
 .vict.lit .vict-win b{color:#fff}
 @keyframes winPop{50%{transform:scale(1.04)}}
 @media(max-width:960px){.vict-grid{grid-template-columns:1fr;max-width:520px;margin:0 auto}.vict-path{display:none}}
+
+/* ===== Reviews band: typed trust line + Hilly run ===== */
+.typed-trust{display:block;border-top:1px solid rgba(30,77,59,.1);padding-top:14px;margin-top:6px;font-family:var(--f-head);line-height:1.5;min-height:2.4em}
+.typed-trust span{display:inline;background:none;padding:0;letter-spacing:0;text-transform:none}
+.typed-trust .t1{color:var(--clay);font-weight:700;font-size:1.25rem}
+.typed-trust .t2{color:var(--forest);font-weight:600;font-size:1rem}
+.typed-trust .t3{color:var(--sun);font-weight:700;font-size:1.15rem;text-shadow:0 1px 0 rgba(0,0,0,.08)}
+.typed-trust .sep{color:var(--ink-soft);font-weight:400;margin:0 6px}
+.typed-trust .tcur{display:inline-block;width:2px;height:1em;background:var(--clay);vertical-align:-2px;margin-left:3px;animation:cur .8s steps(1) infinite}
+.hilly-band{bottom:-4px;width:clamp(120px,15vw,190px);z-index:3}
+.hilly-band .bubble{font-size:.85rem;width:max(170px,140%);padding:10px 14px;bottom:calc(100% + 8px)}
+.hilly-band.stand{left:58%}
+.hilly-band.walk-in{animation-name:hbIn}
+.hilly-band.walk-out{animation-name:hbOut}
+@keyframes hbIn{from{opacity:0;left:100%}12%{opacity:1}to{opacity:1;left:58%}}
+@keyframes hbOut{from{opacity:1;left:58%}90%{opacity:1}to{opacity:0;left:-20%}}
+@media(max-width:900px){.hilly-band{display:none}}
