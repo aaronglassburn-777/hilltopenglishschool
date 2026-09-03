@@ -467,3 +467,30 @@ document.querySelectorAll('.kb-band').forEach(b=>{
   function chk(){if(q.dataset.live)return;const r=q.getBoundingClientRect();if(r.top<innerHeight*.7){q.dataset.live=1;setTimeout(go,900)}}
   addEventListener('scroll',chk,{passive:true});setTimeout(chk,800);
 })();
+
+// ---- Staff page: random order below Teacher Mind, connecting thread, typed + sweeping role labels ----
+(function(){const grid=document.getElementById('staffGrid');if(!grid)return;
+  const svg=grid.querySelector('.staff-thread'),path=svg.querySelector('.thread-path');svg.querySelector('.thread-nodes').remove();
+  const cards=[...grid.querySelectorAll('.staff-card')];const rest=cards.slice(1);
+  if(Math.random()<0.25){rest.sort(()=>Math.random()-.5);rest.forEach(c=>grid.appendChild(c))}  // 75% original order, 25% shuffled (Teacher Mind always first)
+  const all=[cards[0],...rest];
+  const nodes=all.map(()=>{const n=document.createElement('span');n.className='thread-node';grid.appendChild(n);return n});
+  let total=0;
+  function layout(){const gb=grid.getBoundingClientRect();svg.setAttribute('viewBox',`0 0 ${gb.width} ${gb.height}`);
+    const pts=all.map((c,i)=>{const r=c.getBoundingClientRect();const x=(i%2===0?r.left+r.width*.3:r.left+r.width*.7)-gb.left;return {x,top:r.top-gb.top,bottom:r.bottom-gb.top}});
+    let d=`M ${pts[0].x} ${pts[0].top-40} L ${pts[0].x} ${pts[0].top}`;
+    pts.forEach((p,i)=>{if(i===0)return;const q=pts[i-1];const gap=p.top-q.bottom;d+=` M ${q.x} ${q.bottom} C ${q.x} ${q.bottom+gap*.6}, ${p.x} ${p.top-gap*.6}, ${p.x} ${p.top}`});
+    path.setAttribute('d',d);total=path.getTotalLength();path.style.setProperty('--len',total);
+    pts.forEach((p,i)=>{nodes[i].style.left=p.x+'px';nodes[i].style.top=p.top+'px'});}
+  let typers=new WeakMap();
+  function typeRole(el){const full=el.textContent.trim();const id=(typers.get(el)||0)+1;typers.set(el,id);let k=0;el.innerHTML='<span class="tcur"></span>';
+    (function t(){if(typers.get(el)!==id)return;if(k<=full.length){el.innerHTML=full.slice(0,k)+'<span class="tcur"></span>';k++;setTimeout(t,full.charCodeAt(0)>3000?55:40)}else{el.textContent=full;el.classList.add('done')}})()}
+  function update(){layout();const mid=innerHeight*.55;let best=-1,bd=1e9;
+    all.forEach((c,i)=>{const r=c.getBoundingClientRect();const d=Math.abs(r.top+r.height/2-mid);if(d<bd){bd=d;best=i}
+      const inView=r.top<innerHeight*.9&&r.bottom>innerHeight*.1;c.classList.toggle('near',inView&&d<r.height*.9);
+      const role=c.querySelector('.staff-role');if(role&&inView&&!role.dataset.typed){role.dataset.typed=1;typeRole(role)}});
+    nodes.forEach((n,i)=>{n.classList.toggle('on',i<=best);n.classList.toggle('pulse',i===best)});
+    if(best>=0){const gb=grid.getBoundingClientRect();const ty=all[best].getBoundingClientRect().top-gb.top+1;let lo=0,hi=total;for(let k=0;k<18;k++){const m=(lo+hi)/2;if(path.getPointAtLength(m).y<ty)lo=m;else hi=m}path.style.strokeDashoffset=total-lo}}
+  addEventListener('resize',layout);addEventListener('load',()=>{layout();update()});addEventListener('scroll',update,{passive:true});layout();setTimeout(()=>{layout();update()},700);
+  document.getElementById('langToggle')?.addEventListener('click',()=>{grid.querySelectorAll('.staff-role').forEach(r=>{typers.set(r,(typers.get(r)||0)+1);delete r.dataset.typed;r.classList.remove('done')});setTimeout(update,120)});
+})();
