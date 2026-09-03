@@ -257,3 +257,6 @@ if(slides.length>1){
     sec.addEventListener('pointerleave',()=>{f.style.transform=''});
   }
 })();
+
+// ---- classes: rotate the highlighted fact pill ----
+(function(){const ps=document.querySelectorAll('.cine-pills .pill');if(!ps.length)return;let i=0;setInterval(()=>{if(document.hidden)return;ps[i].classList.remove('on');i=(i+1)%ps.length;ps[i].classList.add('on')},3200)})();
