@@ -286,3 +286,10 @@ document.querySelectorAll('[data-slider]').forEach(sl=>{
   new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting&&!tl.dataset.live){tl.dataset.live=1;step();setInterval(step,2600)}}),{threshold:.4}).observe(tl);
   li.forEach((l,k)=>l.addEventListener('click',()=>{i=k-1;step()}));
 })();
+
+// ---- home: story video lightbox ----
+(function(){const b=document.getElementById('playStory'),lb=document.getElementById('storyBox');if(!b||!lb)return;const v=document.getElementById('storyVideo');
+  function open(){lb.hidden=false;document.body.style.overflow='hidden';v.play().catch(()=>{})}
+  function close(){v.pause();lb.hidden=true;document.body.style.overflow=''}
+  b.addEventListener('click',open);lb.querySelector('.lb-close').addEventListener('click',close);lb.addEventListener('click',e=>{if(e.target===lb)close()});addEventListener('keydown',e=>{if(e.key==='Escape'&&!lb.hidden)close()});
+})();
