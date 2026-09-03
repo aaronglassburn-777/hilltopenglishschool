@@ -43,8 +43,9 @@ document.querySelectorAll('.dia').forEach(d=>{
   links.appendChild(li);
   const menu=document.createElement('div');
   menu.className='mobile-menu';
-  document.querySelectorAll('.nav-links li.pg a, .nav-links a.nav-cta').forEach(a=>{
-    menu.appendChild(a.cloneNode(true));
+  document.querySelectorAll('.nav-links li.pg > a, .nav-links .nav-drop a, .nav-links a.nav-cta').forEach(a=>{
+    if(a.closest('.nav-drop')&&a.getAttribute('href')==='staff.html')return;
+    const c=a.cloneNode(true);if(a.closest('.nav-drop'))c.classList.add('sub');menu.appendChild(c);
   });
   document.querySelector('nav').appendChild(menu);
   burger.addEventListener('click',()=>{
@@ -392,4 +393,13 @@ document.querySelectorAll('.kb-band').forEach(b=>{
   }
   new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting&&!el.dataset.live){el.dataset.live=1;show()}}),{threshold:.3}).observe(el.closest('.motto'));
   document.getElementById('langToggle')?.addEventListener('click',()=>{if(el.dataset.live){clearTimeout(t);show()}});
+})();
+
+// ---- Our Story: on phones, move the diamond board between the first paragraph and the quote ----
+(function(){const st=document.querySelector('.story');if(!st)return;const board=st.querySelector('.board'),hint=st.querySelector('.play-hint'),text=st.querySelector('.story .wrap > div:first-child'),side=st.querySelector('.story .wrap > div:last-child');if(!board||!text||!side)return;
+  const firstP=text.querySelector('p'),quote=text.querySelector('blockquote');
+  function place(){const mobile=innerWidth<=900;
+    if(mobile&&board.parentElement!==text){text.insertBefore(board,quote||firstP.nextSibling);if(hint)text.insertBefore(hint,quote||null)}
+    else if(!mobile&&board.parentElement===text){side.prepend(board);if(hint)side.appendChild(hint)}}
+  place();addEventListener('resize',place);
 })();
