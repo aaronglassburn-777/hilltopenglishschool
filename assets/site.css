@@ -834,3 +834,16 @@ html,body{max-width:100%;overflow-x:clip}
 .ap-replay:hover{opacity:1}
 .note-listen.audio-btn{padding:6px 12px 6px 8px}
 .note-listen .ap-ic{width:20px;height:20px}
+
+/* ===== Parents: "hard days — and proud ones" resolve-to-positive heading ===== */
+.soften .s-a,.soften .s-hard,.soften .s-proud{display:inline-block;opacity:0}
+.rv.in .soften .s-a{animation:sIn .7s ease forwards}
+.rv.in .soften .s-hard{color:var(--ink-soft);font-weight:500;animation:sHard 1s ease .5s forwards}
+.rv.in .soften .s-proud{color:var(--forest-deep);position:relative;animation:sProud .9s cubic-bezier(.34,1.5,.5,1) 1.5s forwards}
+.soften .s-proud i{position:absolute;left:0;right:0;bottom:.04em;height:.32em;background:var(--sun-soft);z-index:-1;border-radius:3px;transform:scaleX(0);transform-origin:left}
+.rv.in .soften .s-proud i{animation:sLine .7s cubic-bezier(.2,.7,.2,1) 2.1s forwards}
+@keyframes sIn{from{opacity:0;translate:0 8px}to{opacity:1;translate:0 0}}
+@keyframes sHard{0%{opacity:0;translate:0 10px;filter:blur(3px)}60%{opacity:1;translate:0 0;filter:blur(0)}100%{opacity:.75}}
+@keyframes sProud{from{opacity:0;translate:0 18px;scale:.92}to{opacity:1;translate:0 0;scale:1}}
+@keyframes sLine{to{transform:scaleX(1)}}
+@media(prefers-reduced-motion:reduce){.soften .s-a,.soften .s-hard,.soften .s-proud{opacity:1;animation:none}.soften .s-proud i{transform:none}}
