@@ -502,3 +502,21 @@ document.querySelectorAll('.kb-band').forEach(b=>{
   function chk(){if(sec.dataset.live)return;const r=sec.getBoundingClientRect();if(r.top<innerHeight*.6&&r.bottom>0){sec.dataset.live=1;setTimeout(()=>{step();setInterval(step,4200)},900)}}
   addEventListener('scroll',chk,{passive:true});setTimeout(chk,800);
 })();
+
+// ---- word-rise headings (.words) + lesson-flow sparks ----
+(function(){
+  document.querySelectorAll('h2.words').forEach(h=>{
+    const hl=(h.dataset.hl||'').split(',').map(s=>s.trim()).filter(Boolean);
+    function build(){const text=h.dataset[document.documentElement.lang==='en'?'en':'th']||h.textContent;h.classList.remove('go');
+      h.innerHTML=text.split(/\s+/).map(w=>`<span class="w${hl.some(x=>w.includes(x))?' hl':''}">${w}</span>`).join('');
+      h.querySelectorAll('.w').forEach((w,i)=>w.style.transitionDelay=(i*.12)+'s');
+      requestAnimationFrame(()=>requestAnimationFrame(()=>{if(h.dataset.seen)h.classList.add('go')}))}
+    build();
+    function chk(){if(h.dataset.seen)return;const r=h.getBoundingClientRect();if(r.top<innerHeight*.85&&r.bottom>0){h.dataset.seen=1;h.classList.add('go')}}
+    addEventListener('scroll',chk,{passive:true});setTimeout(chk,600);
+    document.getElementById('langToggle')?.addEventListener('click',()=>setTimeout(build,60));
+  });
+  const flow=document.querySelector('.flow');if(flow){flow.querySelectorAll('.flow-steps li').forEach(li=>li.insertAdjacentHTML('beforeend','<span class="spark"></span>'));
+    function chk(){if(flow.dataset.seen)return;const r=flow.getBoundingClientRect();if(r.top<innerHeight*.8&&r.bottom>0){flow.dataset.seen=1;flow.classList.add('go')}}
+    addEventListener('scroll',chk,{passive:true});setTimeout(chk,600)}
+})();

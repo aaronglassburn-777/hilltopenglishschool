@@ -952,3 +952,30 @@ html,body{max-width:100%;overflow-x:clip}
 .programs .card-photo.lit .card-img img{transform:scale(1.14)}
 .programs .card-photo.lit .icon{transform:rotate(-8deg) scale(1.1)}
 .programs .card-photo.lit .card-body::before{width:56px}
+
+/* ===== Word-rise heading with highlighted word ===== */
+.words .w{display:inline-block;opacity:0;translate:0 18px;transition:opacity .6s ease,translate .6s cubic-bezier(.34,1.4,.5,1);margin-right:.28em}
+.words .w:last-child{margin-right:0}
+.words.go .w{opacity:1;translate:0 0}
+.words .w.hl{position:relative;color:var(--forest-deep)}
+.words .w.hl::after{content:"";position:absolute;left:-.08em;right:-.08em;bottom:.06em;height:.34em;background:var(--sun);z-index:-1;border-radius:4px;transform:scaleX(0);transform-origin:left;transition:transform .6s cubic-bezier(.2,.7,.2,1) .2s}
+.words.go .w.hl::after{transform:scaleX(1)}
+.words.go .w.hl{animation:hlBounce 4.5s ease-in-out 1.2s infinite}
+@keyframes hlBounce{0%,88%,100%{translate:0 0;rotate:0deg}91%{translate:0 -6px;rotate:-2deg}95%{translate:0 0;rotate:1.5deg}}
+
+/* ===== Lesson flow: travelling light along the step lines ===== */
+.flow-steps li::after{background:linear-gradient(90deg,var(--sun-soft),rgba(251,217,146,.35));overflow:hidden}
+.flow-steps li .spark{position:absolute;top:23px;left:44px;right:-18px;height:4px;border-radius:4px;pointer-events:none;overflow:hidden}
+.flow-steps li:last-child .spark{display:none}
+.flow-steps li .spark::before{content:"";position:absolute;top:0;bottom:0;width:38%;left:-40%;border-radius:4px;background:linear-gradient(90deg,transparent,var(--sun),var(--clay),transparent);opacity:0}
+.flow.go .flow-steps li:nth-child(1) .spark::before{animation:spark 4.8s ease-in-out infinite}
+.flow.go .flow-steps li:nth-child(2) .spark::before{animation:spark 4.8s ease-in-out 1.2s infinite}
+.flow.go .flow-steps li:nth-child(3) .spark::before{animation:spark 4.8s ease-in-out 2.4s infinite}
+@keyframes spark{0%{left:-40%;opacity:0}5%{opacity:1}22%{left:100%;opacity:1}26%,100%{left:100%;opacity:0}}
+.flow-steps i{transition:transform .35s,box-shadow .35s}
+.flow.go .flow-steps li:nth-child(1) i{animation:numPop 4.8s ease-in-out 0s infinite}
+.flow.go .flow-steps li:nth-child(2) i{animation:numPop 4.8s ease-in-out 1.2s infinite}
+.flow.go .flow-steps li:nth-child(3) i{animation:numPop 4.8s ease-in-out 2.4s infinite}
+.flow.go .flow-steps li:nth-child(4) i{animation:numPop 4.8s ease-in-out 3.6s infinite}
+@keyframes numPop{0%,100%{transform:scale(1);box-shadow:0 0 0 0 rgba(244,168,61,.6)}4%{transform:scale(1.22);box-shadow:0 0 0 8px rgba(244,168,61,0)}12%{transform:scale(1)}}
+@media(prefers-reduced-motion:reduce){.words .w{opacity:1;translate:0}.flow .spark,.flow-steps i{animation:none!important}}
