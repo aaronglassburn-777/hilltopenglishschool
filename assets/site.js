@@ -318,26 +318,33 @@ document.querySelectorAll('[data-slider]').forEach(sl=>{
   b.addEventListener('click',open);lb.querySelector('.lb-close').addEventListener('click',close);lb.addEventListener('click',e=>{if(e.target===lb)close()});addEventListener('keydown',e=>{if(e.key==='Escape'&&!lb.hidden)close()});
 })();
 
-// ---- Parents page: recorded voice (Gemini TTS files), browser voice as fallback ----
+// ---- Parents page: in-pill audio players (Gemini-recorded files, browser voice fallback) ----
 (function(){
-  if(!document.querySelector('.parents-hero'))return;
-  let audio=null,activeBtn=null;
-  function stop(){if(audio){audio.pause();audio=null}if('speechSynthesis' in window)speechSynthesis.cancel();document.querySelectorAll('.listening').forEach(b=>b.classList.remove('listening','on'));activeBtn=null}
-  function fallback(text,btn){if(!('speechSynthesis' in window))return;const lang=document.documentElement.lang==='en'?'en-US':'th-TH';const u=new SpeechSynthesisUtterance(text);u.lang=lang;u.onend=u.onerror=stop;speechSynthesis.speak(u)}
-  function play(key,btn,text){
-    if(activeBtn===btn){stop();return}
-    stop();activeBtn=btn;btn.classList.add('listening','on');
-    const lang=document.documentElement.lang==='en'?'en':'th';
-    audio=new Audio(`assets/audio/parents-${key}-${lang}.mp3`);
-    audio.onended=stop;audio.onerror=()=>{audio=null;fallback(text,btn)};
-    audio.play().catch(()=>fallback(text,btn));
-  }
-  const txt=el=>el.textContent.replace(/\s+/g,' ').trim();
-  document.querySelectorAll('.note-listen').forEach((b,i)=>b.addEventListener('click',()=>{const a=b.closest('.note');play('note-'+(i+1),b,txt(a.querySelector('h3'))+'. '+txt(a.querySelector('p')))}));
-  const tips=document.getElementById('listenTips');if(tips)tips.addEventListener('click',()=>play('tips',tips,[...document.querySelectorAll('.practices .road-card:not(.card-cta)')].map(c=>txt(c.querySelector('b'))+'. '+txt(c.querySelector('p'))).join(' ')));
-  const hero=document.getElementById('listenHero');if(hero)hero.addEventListener('click',()=>{const h=document.querySelector('.parents-hero');play('hero',hero,txt(h.querySelector('h1'))+'. '+txt(h.querySelector('p')))});
-  document.getElementById('langToggle')?.addEventListener('click',stop);
-  addEventListener('pagehide',stop);
+  const btns=document.querySelectorAll('.audio-btn[data-audio]');if(!btns.length)return;
+  let current=null;
+  const fmt=s=>{s=Math.max(0,Math.round(s||0));return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')};
+  btns.forEach(btn=>{
+    btn.insertAdjacentHTML('afterbegin','<span class="ap-ic" aria-hidden="true"></span>');
+    btn.insertAdjacentHTML('beforeend','<span class="ap-player"><span class="ap-eq"><i></i><i></i><i></i><i></i></span><span class="ap-track"><b></b></span><span class="ap-time">0:00</span><span class="ap-replay" title="Replay">↺</span></span>');
+    const bar=btn.querySelector('.ap-track b'),time=btn.querySelector('.ap-time'),replay=btn.querySelector('.ap-replay');
+    let audio=null,hover=false,closeT;
+    function src(){return `assets/audio/parents-${btn.dataset.audio}-${document.documentElement.lang==='en'?'en':'th'}.mp3`}
+    function open(){clearTimeout(closeT);btn.classList.add('open')}
+    function maybeClose(){clearTimeout(closeT);closeT=setTimeout(()=>{if(!btn.classList.contains('playing')&&!hover)btn.classList.remove('open')},900)}
+    function load(){if(audio&&audio.dataset.src===src())return audio;if(audio){audio.pause()}audio=new Audio(src());audio.dataset.src=src();audio.preload='metadata';
+      audio.addEventListener('timeupdate',()=>{if(audio.duration){bar.style.width=(audio.currentTime/audio.duration*100)+'%';time.textContent=fmt(audio.duration-audio.currentTime)}});
+      audio.addEventListener('loadedmetadata',()=>{time.textContent=fmt(audio.duration)});
+      audio.addEventListener('ended',()=>{btn.classList.remove('playing');bar.style.width='100%';time.textContent='0:00';maybeClose()});
+      audio.addEventListener('pause',()=>{btn.classList.remove('playing');maybeClose()});
+      audio.addEventListener('play',()=>{btn.classList.add('playing');open();if(current&&current!==audio)current.pause();current=audio});
+      audio.addEventListener('error',()=>{btn.classList.remove('playing','open')});return audio}
+    btn.addEventListener('click',e=>{if(e.target.closest('.ap-replay')){const a=load();a.currentTime=0;a.play().catch(()=>{});return}
+      const a=load();if(a.paused){a.play().catch(()=>{})}else a.pause()});
+    btn.addEventListener('mouseenter',()=>{hover=true;if(audio&&audio.currentTime>0)open()});
+    btn.addEventListener('mouseleave',()=>{hover=false;maybeClose()});
+    document.getElementById('langToggle')?.addEventListener('click',()=>{if(audio){audio.pause();audio=null;bar.style.width='0';time.textContent='0:00';btn.classList.remove('open')}});
+  });
+  addEventListener('pagehide',()=>{if(current)current.pause()});
 })();
 
 // ---- Ken Burns bands (Age 12+, Reviews): slides, rotating words / quotes, optional shuffle ----

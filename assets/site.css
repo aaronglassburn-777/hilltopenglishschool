@@ -805,3 +805,32 @@ html,body{max-width:100%;overflow-x:clip}
 @media(max-width:480px){.clips{grid-template-columns:1fr}.trust li{font-size:.8rem;padding:7px 12px}}
 .mobile-menu a.sub{padding-left:22px;font-size:.98rem;opacity:.9}.mobile-menu a.sub::before{content:"↳ ";opacity:.6}
 @media(max-width:640px){.board{gap:4%;padding:8% 0 4%;margin:14px 0 0}.dia-label{font-size:.78rem}}
+
+/* ===== In-pill audio player ===== */
+.audio-btn{position:relative;display:inline-flex;align-items:center;gap:10px;overflow:hidden;transition:.35s;min-width:0;cursor:pointer}
+.audio-hero{background:rgba(255,255,255,.94);color:var(--forest-deep);border-color:transparent;box-shadow:0 8px 24px rgba(0,0,0,.2)}
+.audio-hero:hover{background:#fff}
+.ap-ic{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;flex-shrink:0;background:currentColor;color:inherit;position:relative}
+.ap-ic::before{content:"";width:0;height:0;border-style:solid;border-width:5px 0 5px 8px;border-color:transparent transparent transparent #fff;margin-left:2px}
+.audio-hero .ap-ic::before,.note-listen .ap-ic::before{border-left-color:var(--cream)}
+.btn-primary .ap-ic::before{border-left-color:var(--sun)}
+.audio-btn.playing .ap-ic::before{width:3px;height:10px;border:0;background:#fff;box-shadow:5px 0 0 #fff;margin:0 0 0 -5px;border-radius:1px}
+.audio-hero.playing .ap-ic::before,.note-listen.playing .ap-ic::before{background:var(--cream);box-shadow:5px 0 0 var(--cream)}
+.btn-primary.playing .ap-ic::before{background:var(--sun);box-shadow:5px 0 0 var(--sun)}
+.ap-label{white-space:nowrap}
+.ap-player{display:none;align-items:center;gap:8px}
+.audio-btn.open .ap-player{display:inline-flex}
+.audio-btn.open .ap-label{display:none}
+.ap-eq{display:flex;align-items:flex-end;gap:2px;height:14px;width:18px}
+.ap-eq i{flex:1;background:currentColor;border-radius:1px;height:30%;opacity:.85;transition:height .2s}
+.audio-btn.playing .ap-eq i{animation:eq .7s ease-in-out infinite}
+.audio-btn.playing .ap-eq i:nth-child(2){animation-delay:.15s}.audio-btn.playing .ap-eq i:nth-child(3){animation-delay:.3s}.audio-btn.playing .ap-eq i:nth-child(4){animation-delay:.45s}
+@keyframes eq{0%,100%{height:30%}50%{height:100%}}
+.ap-track{width:74px;height:3px;border-radius:3px;background:currentColor;opacity:.25;position:relative;overflow:hidden}
+.ap-track b{position:absolute;left:0;top:0;bottom:0;width:0;background:currentColor;opacity:1;border-radius:3px}
+.ap-track{opacity:1;background:rgba(127,127,127,.3)}
+.ap-time{font-size:.72rem;font-variant-numeric:tabular-nums;opacity:.85;font-family:var(--f-body)}
+.ap-replay{width:20px;height:20px;border-radius:50%;border:1.5px solid currentColor;display:grid;place-items:center;font-size:.7rem;line-height:1;opacity:.7}
+.ap-replay:hover{opacity:1}
+.note-listen.audio-btn{padding:6px 12px 6px 8px}
+.note-listen .ap-ic{width:20px;height:20px}
