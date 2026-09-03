@@ -322,3 +322,18 @@ document.querySelectorAll('[data-slider]').forEach(sl=>{
   const hero=document.getElementById('listenHero');if(hero)hero.addEventListener('click',()=>{const h=document.querySelector('.parents-hero');speak(txt(h.querySelector('h1'))+'. '+txt(h.querySelector('p')),hero)});
   addEventListener('beforeunload',()=>synth.cancel());
 })();
+
+// ---- Age 12+: Ken Burns band + rotating words ----
+(function(){const b=document.querySelector('.kb-band');if(!b)return;const sl=b.querySelectorAll('.kb-slide'),w=b.querySelectorAll('.kb-word');let i=0;w[0]&&w[0].classList.add('on');
+  setInterval(()=>{if(document.hidden)return;sl[i].classList.remove('on');w[i]&&w[i].classList.remove('on');i=(i+1)%sl.length;sl[i].classList.add('on');w[i]&&w[i].classList.add('on')},7000)})();
+
+// ---- typed headings: type when scrolled into view, retype on language change ----
+(function(){const hs=document.querySelectorAll('[data-typed]');if(!hs.length)return;
+  function type(h){const full=h.dataset[document.documentElement.lang==='en'?'en':'th']||h.textContent;let k=0;clearTimeout(h._t);h.innerHTML='<span class="tcur"></span>';
+    (function step(){h.innerHTML=full.slice(0,k)+'<span class="tcur"></span>';if(k++<full.length)h._t=setTimeout(step,full.charCodeAt(0)>3000?70:48);else setTimeout(()=>{h.innerHTML=full},1800)})()}
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting&&!e.target.dataset.done){e.target.dataset.done=1;type(e.target)}}),{threshold:.6});
+  hs.forEach(h=>{h.textContent='';io.observe(h)});
+  function chk(){hs.forEach(h=>{if(h.dataset.done)return;const r=h.getBoundingClientRect();if(r.top<innerHeight*.85&&r.bottom>0){h.dataset.done=1;type(h)}})}
+  addEventListener('scroll',chk,{passive:true});setTimeout(chk,800);
+  document.getElementById('langToggle')?.addEventListener('click',()=>setTimeout(()=>hs.forEach(h=>{if(h.dataset.done)type(h)}),60));
+})();
