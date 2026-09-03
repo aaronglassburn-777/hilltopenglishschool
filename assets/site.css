@@ -765,3 +765,19 @@ html,body{max-width:100%;overflow-x:clip}
 .sem b{display:block;font-family:var(--f-head);font-size:1.15rem;color:var(--forest-deep)}
 .sem span{display:block;font-size:.82rem;color:var(--ink-soft);margin-top:4px}
 @media(max-width:480px){.sem-tiles{grid-template-columns:1fr}}
+
+/* ===== Reviews: Ken Burns band with parent quote ===== */
+.kb-reviews{height:clamp(420px,62vh,640px);margin-bottom:0;display:flex;align-items:center}
+.kb-shade-left{background:linear-gradient(90deg,rgba(15,35,27,.82) 0%,rgba(15,35,27,.55) 45%,rgba(15,35,27,.1) 100%)}
+.kb-quote-wrap{position:relative;z-index:2;width:100%}
+.kb-quote-card{max-width:520px;background:rgba(255,255,255,.96);border-radius:var(--radius);padding:30px 32px 24px;box-shadow:0 24px 60px rgba(0,0,0,.35);backdrop-filter:blur(6px)}
+.kb-quote-card .stars{color:var(--sun);letter-spacing:.15em;font-size:1rem;margin-bottom:10px}
+.kb-quotes{position:relative;min-height:7.5em}
+.kb-q{position:absolute;inset:0;margin:0;opacity:0;translate:0 10px;transition:opacity .7s,translate .7s;pointer-events:none}
+.kb-q.on{opacity:1;translate:0 0}
+.kb-q p{font-family:var(--f-head);font-size:1.15rem;line-height:1.45;color:var(--forest-deep);margin:0 0 12px}
+.kb-q footer{font-size:.86rem;color:var(--ink-soft);font-weight:600}
+.kb-trust{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;padding-top:16px;border-top:1px solid rgba(30,77,59,.1)}
+.kb-trust span{font-size:.74rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--forest);background:var(--cream);padding:5px 10px;border-radius:999px}
+@media(max-width:640px){.kb-quote-card{padding:22px}.kb-q p{font-size:1rem}.kb-quotes{min-height:9.5em}}
+.kb-q footer{background:transparent!important;padding:0!important;margin:0!important;color:var(--ink-soft)!important;font-size:.86rem;font-weight:600;border:0}

@@ -338,3 +338,58 @@ document.querySelectorAll('[data-slider]').forEach(sl=>{
   document.getElementById('langToggle')?.addEventListener('click',stop);
   addEventListener('pagehide',stop);
 })();
+
+// ---- Ken Burns bands (Age 12+, Reviews): slides, rotating words / quotes, optional shuffle ----
+document.querySelectorAll('.kb-band').forEach(b=>{
+  let sl=[...b.querySelectorAll('.kb-slide')];const w=b.querySelectorAll('.kb-word'),q=b.querySelectorAll('.kb-q');
+  if(b.hasAttribute('data-shuffle')){sl.forEach(s=>s.classList.remove('on'));sl.sort(()=>Math.random()-.5);sl[0].classList.add('on')}
+  let i=0,qi=0;w[0]&&w[0].classList.add('on');
+  setInterval(()=>{if(document.hidden)return;sl[i].classList.remove('on');w[i]&&w[i].classList.remove('on');i=(i+1)%sl.length;sl[i].classList.add('on');w[i]&&w[i].classList.add('on');
+    if(q.length){q[qi].classList.remove('on');qi=(qi+1)%q.length;q[qi].classList.add('on')}},7000);
+});
+
+// ---- typed headings: type when scrolled into view, retype on language change ----
+(function(){const hs=document.querySelectorAll('[data-typed]');if(!hs.length)return;
+  function type(h){const full=h.dataset[document.documentElement.lang==='en'?'en':'th']||h.textContent;let k=0;clearTimeout(h._t);h.innerHTML='<span class="tcur"></span>';
+    (function step(){h.innerHTML=full.slice(0,k)+'<span class="tcur"></span>';if(k++<full.length)h._t=setTimeout(step,full.charCodeAt(0)>3000?70:48);else setTimeout(()=>{h.innerHTML=full},1800)})()}
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting&&!e.target.dataset.done){e.target.dataset.done=1;type(e.target)}}),{threshold:.6});
+  hs.forEach(h=>{h.textContent='';io.observe(h)});
+  function chk(){hs.forEach(h=>{if(h.dataset.done)return;const r=h.getBoundingClientRect();if(r.top<innerHeight*.85&&r.bottom>0){h.dataset.done=1;type(h)}})}
+  addEventListener('scroll',chk,{passive:true});setTimeout(chk,800);
+  document.getElementById('langToggle')?.addEventListener('click',()=>setTimeout(()=>hs.forEach(h=>{if(h.dataset.done)type(h)}),60));
+})();
+
+// ---- Contact: sliding + typing mottos ----
+(function(){const el=document.getElementById('mottoLine');if(!el)return;
+  const M=[
+    ['ขยันเรียน ขยันทำ แล้ว<em>ไปให้ถึงเป้าหมาย</em>','Work hard, study hard, and <em>reach your goals.</em>'],
+    ['เราดูแลให้ทุกครอบครัวมีแรงสนับสนุนที่ต้องการ <em>เพื่อไปให้ไกลกว่าเดิม</em>','We make sure every family has the support they need <em>to go further in life.</em>'],
+    ['ทุกคำที่ลูกกล้าพูด <em>คือประตูอีกบานที่เปิดออก</em>','Every word your child dares to say <em>is another door opening.</em>'],
+    ['เรียนแบบไม่เครียด <em>แต่ผลลัพธ์จริงจัง</em>','Stress-free learning. <em>Serious results.</em>'],
+    ['เด็กที่มีความสุขในวันนี้ <em>คือผู้ใหญ่ที่มั่นใจในวันหน้า</em>','A happy child today <em>is a confident adult tomorrow.</em>'],
+    ['ห้องเรียนเล็ก <em>ความฝันใหญ่</em>','Small classes. <em>Big dreams.</em>'],
+    ['พ่อแม่คือครูคนแรก <em>เราภูมิใจที่ได้เป็นครูคนที่สอง</em>','Parents are the first teachers. <em>We are honored to be the second.</em>'],
+    ['ภาษาอังกฤษไม่ใช่วิชา <em>แต่คือกุญแจ</em>','English is not a subject. <em>It is a key.</em>'],
+    ['ทุกคนได้รับความรักและเกียรติ <em>ทุกวัน</em>','Every child treated with love and honor, <em>every day.</em>'],
+    ['เริ่มวันนี้ <em>แล้วดูลูกเติบโตวันละนิด</em>','Start today, <em>and watch them grow a little every day.</em>'],
+    ['จากนางแล เชียงราย <em>สู่โลกทั้งใบ</em>','From Nanglae, Chiang Rai, <em>to the whole world.</em>'],
+    ['ความพยายามวันนี้ <em>คือโอกาสของวันหน้า</em>','Today\'s effort <em>is tomorrow\'s opportunity.</em>']
+  ];
+  const dirs=['translate(0,-70px)','translate(0,70px)','translate(-90px,0)','translate(90px,0)','translate(-70px,-50px) rotate(-4deg)','translate(70px,50px) rotate(4deg)','scale(.6)','rotateX(70deg)'];
+  let i=Math.floor(Math.random()*M.length),t;
+  function show(){
+    if(document.hidden){t=setTimeout(show,1500);return}
+    const lang=document.documentElement.lang==='en'?1:0,html=M[i][lang];
+    el.classList.remove('in');el.classList.add('out');
+    setTimeout(()=>{
+      el.classList.remove('out');el.style.transform=dirs[Math.floor(Math.random()*dirs.length)];el.innerHTML='<span class="tcur"></span>';
+      void el.offsetWidth;el.classList.add('in');
+      // type the plain text, then swap in the highlighted version
+      const plain=html.replace(/<\/?em>/g,'');let k=0;
+      (function step(){if(k<=plain.length){el.innerHTML=plain.slice(0,k++)+'<span class="tcur"></span>';t=setTimeout(step,plain.charCodeAt(0)>3000?45:34)}
+        else{el.innerHTML=html;i=(i+1)%M.length;t=setTimeout(show,3200)}})();
+    },520);
+  }
+  new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting&&!el.dataset.live){el.dataset.live=1;show()}}),{threshold:.3}).observe(el.closest('.motto'));
+  document.getElementById('langToggle')?.addEventListener('click',()=>{if(el.dataset.live){clearTimeout(t);show()}});
+})();
